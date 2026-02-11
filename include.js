@@ -213,3 +213,41 @@ document.addEventListener("DOMContentLoaded", function() {
     // ヘッダーが非同期で読み込まれる場合、少し遅延させる必要があるかもしれません
     setTimeout(updateLangButtons, 500);
 });
+
+
+/* include.js */
+
+function loadComponent(id, file) {
+    fetch(file)
+        .then(response => {
+            if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+            return response.text();
+        })
+        .then(data => {
+            const container = document.getElementById(id);
+            container.innerHTML = data;
+
+            // --- GitHub Pages対応: リンクのパスを自動調整 ---
+            const isGitHubPages = window.location.hostname.includes('github.io');
+            if (isGitHubPages) {
+                // URLからリポジトリ名を取得 (例: /repo-name/)
+                const repoName = '/' + window.location.pathname.split('/')[1] + '/';
+                
+                // ヘッダー内の全てのリンク (aタグ) を修正
+                const links = container.querySelectorAll('a');
+                links.forEach(link => {
+                    const href = link.getAttribute('href');
+                    // スラッシュから始まる絶対パス的な書き方のものだけ修正
+                    if (href && href.startsWith('/')) {
+                        // 重複を防ぎつつリポジトリ名を付与
+                        if (!href.startsWith(repoName)) {
+                            link.setAttribute('href', (repoName + href).replace(/\/+/g, '/'));
+                        }
+                    }
+                });
+            }
+            
+            updateLangButtons();
+        })
+        .catch(error => console.error('Error loading component:', error));
+}
