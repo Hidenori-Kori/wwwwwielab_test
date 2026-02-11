@@ -214,10 +214,13 @@ document.addEventListener("DOMContentLoaded", function() {
     setTimeout(updateLangButtons, 500);
 });
 
-
-/* include.js */
-
-function loadComponent(id, file) {
+/**
+ * HTMLコンポーネントを読み込む関数
+ * @param {string} id - 挿入先のHTML要素のID (例: 'header-placeholder')
+ * @param {string} file - 読み込むファイルのパス (例: '../header.html')
+ * @param {string} rootPath - [重要] 現在のページからルート(index.html)までの相対パス (例: '../' または './')
+ */
+function loadComponent(id, file, rootPath = './') {
     fetch(file)
         .then(response => {
             if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -227,27 +230,48 @@ function loadComponent(id, file) {
             const container = document.getElementById(id);
             container.innerHTML = data;
 
-            // --- GitHub Pages対応: リンクのパスを自動調整 ---
-            const isGitHubPages = window.location.hostname.includes('github.io');
-            if (isGitHubPages) {
-                // URLからリポジトリ名を取得 (例: /repo-name/)
-                const repoName = '/' + window.location.pathname.split('/')[1] + '/';
-                
-                // ヘッダー内の全てのリンク (aタグ) を修正
-                const links = container.querySelectorAll('a');
-                links.forEach(link => {
-                    const href = link.getAttribute('href');
-                    // スラッシュから始まる絶対パス的な書き方のものだけ修正
-                    if (href && href.startsWith('/')) {
-                        // 重複を防ぎつつリポジトリ名を付与
-                        if (!href.startsWith(repoName)) {
-                            link.setAttribute('href', (repoName + href).replace(/\/+/g, '/'));
-                        }
-                    }
-                });
-            }
+            // --- パスの書き換え処理 ---
+            // header.html 内の「href="./"」や「src="./"」を、「href="../"」などに置換する
+            const links = container.querySelectorAll('a, img, video, source');
             
-            updateLangButtons();
+            links.forEach(element => {
+                // href属性の書き換え
+                if (element.hasAttribute('href')) {
+                    const href = element.getAttribute('href');
+                    // "./" で始まるリンクだけを対象にする
+                    if (href && href.startsWith('./')) {
+                        // "./" を削除して、引数で渡された rootPath をくっつける
+                        // 例: "./index.html" -> "../index.html"
+                        element.setAttribute('href', rootPath + href.substring(2));
+                    }
+                }
+                // src属性の書き換え（画像や動画用）
+                if (element.hasAttribute('src')) {
+                    const src = element.getAttribute('src');
+                    if (src && src.startsWith('./')) {
+                        element.setAttribute('src', rootPath + src.substring(2));
+                    }
+                }
+            });
+
+            // 言語ボタンの更新など
+            if (typeof updateLangButtons === 'function') updateLangButtons();
         })
         .catch(error => console.error('Error loading component:', error));
 }
+
+// --- 以下、ハンバーガーメニューなどの既存コード ---
+document.addEventListener('click', function(e) {
+    const nav = document.querySelector('.nav-links');
+    const hamburger = e.target.closest('.hamburger');
+    if (hamburger) {
+        if (nav) nav.classList.toggle('active');
+        return;
+    }
+    if (nav && nav.classList.contains('active')) {
+        if (!e.target.closest('.nav-links')) {
+            nav.classList.remove('active');
+        }
+    }
+});
+// (その他のコードはそのまま維持)
