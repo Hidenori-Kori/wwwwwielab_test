@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>受賞・表彰 | 魏研究室</title>
+    <link rel="stylesheet" href="../Base/style.css"> 
+</head>
+<body>
+
+    <div id="header-placeholder"></div>
+
+    <section class="hero" style="height: 40vh;">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <h1>受賞・表彰</h1>
+            <h3>Awards & Honors</h3>
+        </div>
+    </section>
+
+    <section class="awards-list">
+        <div class="container">
+            <h2 class="section-title">Award History</h2>
+            <div id="awards-list-wrapper">
+                <p style="text-align: center; color: #888;">Loading data...</p>
+            </div>
+        </div>
+    </section>
+    
+    <div id="footer-placeholder"></div>
+
+    <script src="../include.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            loadComponent('header-placeholder', '../header.html');
+            loadComponent('footer-placeholder', '../footer.html');
+            
+            // CSVデータの読み込み
+            loadAwardsData();
+        });
+
+        async function loadAwardsData() {
+            try {
+                // キャッシュ回避
+                const response = await fetch('../csv/awards_data.csv?v=' + new Date().getTime());
+                
+                if (!response.ok) throw new Error("CSV file not found");
+                const text = await response.text();
+
+                // CSVパース (1行目はヘッダーなので削除)
+                const rows = text.trim().split('\n').slice(1);
+
+                const wrapper = document.getElementById('awards-list-wrapper');
+                wrapper.innerHTML = '';
+
+                rows.forEach(row => {
+                    // カンマ区切り
+                    const cols = row.split(',');
+                    if (cols.length < 5) return;
+
+                    const date = cols[0];
+                    const awardName = cols[1];
+                    const eventName = cols[2];
+                    const recipient = cols[3];
+                    const image = cols[4];
+                    const link = cols[5] ? cols[5].trim() : "";
+
+                    // リンク設定
+                    const cardTag = link ? 'a' : 'div';
+                    const linkClass = link ? 'has-link' : '';
+                    
+                    const card = document.createElement(cardTag);
+                    card.className = `award-card ${linkClass}`;
+                    if(link) {
+                        card.setAttribute('href', link);
+                        card.setAttribute('target', '_blank');
+                    }
+
+                    card.innerHTML = `
+                        <div class="award-content">
+                            <div class="award-meta">
+                                <span class="award-date">${date}</span>
+                                <span class="award-event">${eventName}</span>
+                            </div>
+                            <h3 class="award-title">
+                                <span class="award-icon">🏆</span>
+                                ${awardName}
+                            </h3>
+                            <div class="award-recipient">${recipient}</div>
+                            ${link ? '<div class="link-indicator">詳細を見る &rarr;</div>' : ''}
+                        </div>
+                        <div class="award-image" style="background-image: url('${image}');"></div>
+                    `;
+                    wrapper.appendChild(card);
+                });
+
+            } catch (error) {
+                console.error("Awards Error:", error);
+                document.getElementById('awards-list-wrapper').innerHTML = 
+                    '<p style="text-align:center;">データの読み込みに失敗しました。</p>';
+            }
+        }
+    </script>
+</body>
+</html>

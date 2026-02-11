@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News一覧 | 魏研究室</title>
+    <link rel="stylesheet" href="../Base/style.css"> 
+</head>
+<body>
+
+    <div id="header-placeholder"></div>
+
+    <section class="hero" style="height: 30vh;">
+        <div class="hero-overlay"></div>
+
+        <div class="container hero-content">
+            <h1>News</h1>
+            <h3>過去のニュース一覧</h3>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div id="news-container" data-limit="all"></div>
+            
+            <p style="text-align:center; margin-top:30px;">
+                <a href="../index.html">ホームに戻る</a>
+            </p>
+        </div>
+    </section>
+    
+    <div id="footer-placeholder"></div>
+
+    <script src="../include.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            loadComponent('header-placeholder', '../header.html');
+            loadComponent('footer-placeholder', '../footer.html');
+        });
+    </script>
+    <script src="news_loader.js"></script>
+</body>
+</html>

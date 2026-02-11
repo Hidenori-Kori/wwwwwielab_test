@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>研究室・設備 | 魏研究室</title>
+    <link rel="stylesheet" href="/Base/style.css"> 
+    
+</head>
+<body class="theme-green">
+
+    <div id="header-placeholder"></div>
+
+    <section class="hero" style="height: 40vh;">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <h1>Laboratory & Facilities</h1>
+            <h3>研究室・設備紹介</h3>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2 class="section-title">Laboratory Life</h2>
+            
+            <div class="feature-section">
+                <div class="feature-img">
+                    <img src="../../figurer/IMG_0111.jpeg" alt="研究室">
+                </div>
+                <div class="feature-text">
+                    <h3>研究室</h3>
+                    <p>
+                        学生一人ひとりに広めのデスクとデュアルモニター環境が用意されています。
+                        集中してシミュレーションやコーディングに取り組める環境です。<br>
+                        研究室メンバーとのディスカッションも活発に行われています。(AI談)
+                    </p>
+                </div>
+            </div>
+
+            <div class="feature-section">
+                <div class="feature-img">
+                    <img src="../../figurer/IMG_0111.jpeg" alt="実験室">
+                </div>
+                <div class="feature-text">
+                    <h3>実験室</h3>
+                    <p>
+                        ゼミや打ち合わせを行う共有スペースです。<br>
+                        研究の合間には、コーヒーを飲みながら雑談したり、ボードゲーム（Duel Masters等）で息抜きをしたりすることもあります。
+                        メリハリをつけて研究に取り組めます。(AI談)
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section style="background-color: #f4f4f4;">
+        <div class="container">
+            <h2 class="section-title">Experimental Equipment</h2>
+            <p style="text-align: center; margin-bottom: 30px;">
+                パワーエレクトロニクス研究に必要な高度な測定機器を取り揃えています。
+            </p>
+
+            <div class="grid">
+                <div class="card">
+                    <div class="card-img">
+                        <span>Oscilloscopes</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>オシロスコープ</h3>
+                        <p>MHz帯のスイッチング波形も正確に捉える高性能なオシロスコープを複数台完備しています。</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-img">
+                        <span>Power Supply</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>電源</h3>
+                        <p>様々な電圧・電流条件での実験を可能にする、安定化電源装置です。</p>
+                    </div>
+                </div>
+
+                <div class="card">
+                    <div class="card-img">
+                        <span>Soldering Station</span>
+                    </div>
+                    <div class="card-content">
+                        <h3>試作・実装スペース</h3>
+                        <p>回路基板の設計から実装までを行える作業スペース。顕微鏡や精密ハンダ付機器も完備。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h2 class="section-title">Computing & Software</h2>
+            
+            <div class="feature-section">
+                <div class="feature-text">
+                    <h3>シミュレーション・解析環境</h3>
+                    <p>
+                        魏研究室では、最適化設計に強力な計算機リソースを使用します。
+                        Windows Subsystem for Linux (WSL) を活用した数値解析環境などが整っています。
+                    </p>
+                    <br>
+                    <h4>主な使用言語・ツール</h4>
+                    <ul class="spec-list">
+                        <li><strong>C/C++:</strong> 最適化アルゴリズムの実装、高速演算処理に使用</li>
+                        <li><strong>Python:</strong> データ解析、グラフ描画 (Matplotlib)、数値計算 (NumPy/SciPy)</li>
+                        <li><strong>Simulation:</strong> LTspice, ngspice (回路シミュレーション)</li>
+                        <li><strong>Web:</strong> 研究成果のアウトプットとしてのWeb技術 (HTML/JS)</li>
+                    </ul>
+                    <br>
+                    <p>
+                        ※配属後に環境構築のサポートがありますので、プログラミング初心者でも安心して研究をスタートできます。
+                    </p>
+                </div>
+                <div class="feature-img">
+                    <img src="../images/coding.jpg" alt="開発環境">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="/include.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            loadComponent('header-placeholder', '../header_students.html');
+            loadComponent('footer-placeholder', '/footer.html');
+        });
+    </script>
+</body>
+</html>

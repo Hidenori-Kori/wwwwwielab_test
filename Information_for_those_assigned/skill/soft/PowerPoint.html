@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>魏研究室 | 千葉工業大学</title>
+    <link rel="stylesheet" href="/Base/style.css"> 
+</head>
+<body class="theme-green">
+
+    <div id="header-placeholder"></div>
+
+    <section class="hero" style="height: 50vh;">
+        <div class="hero-overlay"></div>
+
+        <div class="container hero-content">
+            <h1>PowerPoint</h1>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+            <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+            <div class="circuit-review">
+                <p>研究発表におけるスライドは、聴衆に「研究の価値」と「正しさ」を伝えるためのツールです。<br>
+                ここでは、学会発表やゼミで求められる<strong>「アカデミック・スタンダード」</strong>な作成ルールをまとめます。</p>
+
+                <h2>1. 研究スライドの鉄則</h2>
+                <div style="background-color: #f9f9f9; padding: 15px; border-left: 5px solid #003366; margin-bottom: 20px;">
+                    <strong>"Simple is Best"</strong><br>
+                    過度な装飾やアニメーションは不要です。一番重要なのは「データが見えること」と「論理が通っていること」です。
+                </div>
+
+                <h2>2. スライドの基本構成 (Story)</h2>
+                <p>工学系の発表は、以下の流れ（IMRAD形式）で構成するのが基本です。</p>
+                
+                <table border="1" style="border-collapse: collapse; width: 100%; text-align: left;">
+                    <thead style="background-color: #f2f2f2; text-align: center;">
+                        <tr>
+                            <th style="width: 20%;">項目</th>
+                            <th>内容とポイント</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td style="text-align: center;"><strong>1. 背景</strong><br>(Background)</td>
+                            <td>
+                                <ul>
+                                    <li>社会的な課題や技術的な現状を説明する。</li>
+                                    <li>聴衆（専門家でない場合もある）と知識レベルを合わせる。</li>
+                                    <li><strong>重要:</strong> 既存研究の問題点（何が未解決か）を明確にする。</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;"><strong>2. 目的</strong><br>(Objective)</td>
+                            <td>
+                                <ul>
+                                    <li>本研究で「何を解決するのか」「何を明らかにするのか」を1文で断言する。</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;"><strong>3. 手法/提案</strong><br>(Method)</td>
+                            <td>
+                                <ul>
+                                    <li>提案する回路方式、アルゴリズム、実験系などを図を用いて説明する。</li>
+                                    <li>従来法との違いを明確にする。</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;"><strong>4. 結果</strong><br>(Result)</td>
+                            <td>
+                                <ul>
+                                    <li>シミュレーション結果や実験データをグラフ・波形・表で示す。</li>
+                                    <li>客観的な事実のみを述べる。</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;"><strong>5. 考察</strong><br>(Discussion)</td>
+                            <td>
+                                <ul>
+                                    <li>結果から何が言えるのか、なぜそうなったのか（理論との整合性）を論じる。</li>
+                                    <li>本研究のハイライトとなる部分。</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;"><strong>6. 結論</strong><br>(Conclusion)</td>
+                            <td>
+                                <ul>
+                                    <li>目的が達成されたか、得られた知見、今後の課題を箇条書きでまとめる。</li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align: center;"><strong>7. 今後の展望</strong><br>(Future Work)</td>
+                            <td>
+                                <ul>
+                                    <li>今後どのように発展させるか、研究の方向性を示す。</li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <hr>
+
+                <h2>3. 視認性を高めるデザインルール</h2>
+                
+                <h3>フォント (Font)</h3>
+                <ul>
+                    <li><strong>推奨フォント:</strong>
+                        <ul>
+                            <li>日本語: <strong>メイリオ</strong>, <strong>游ゴシック</strong> (視認性が高いゴシック体)</li>
+                            <li>英語: <strong>Arial</strong>, <strong>Segoe UI</strong>, Helvetica (サンセリフ体)</li>
+                        </ul>
+                    </li>
+                    <li><strong>NGフォント:</strong> 明朝体やTimes New Roman（細い線がプロジェクターで見えにくい）。ポップ体（研究に適さない）。</li>
+                    <li><strong>サイズ:</strong> 本文は <strong>24pt以上</strong> を推奨。最小でも 18pt。タイトルは 32pt以上。</li>
+                </ul>
+
+                <h3>配色 (Color)</h3>
+                <ul>
+                    <li><strong>基本色:</strong> 文字は「黒（または濃いグレー）」、背景は「白」。</li>
+                    <li><strong>強調色:</strong> 赤や青を使用するが、多色使いは避ける（3色以内に抑える）。</li>
+                    <li><strong>ユニバーサルデザイン:</strong> 「赤と緑」の区別がつきにくい人もいるため、グラフでは色だけでなく「線種（実線・破線）」や「マーカー（●・▲）」を変えて区別する。</li>
+                </ul>
+
+                <hr>
+
+                <h2>4. 図表作成の作法</h2>
+                <p>研究発表で最も重要なのはデータです。グラフ作成時は以下を徹底してください。</p>
+                
+                <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                    <div style="flex: 1;">
+                        <h3>グラフ (Graphs)</h3>
+                        <ul>
+                            <li><strong>軸ラベル:</strong> 「物理量 [単位]」を必ず記載する。<br>(例: <code>Frequency [kHz]</code>, <code>Voltage [V]</code>)</li>
+                            <li><strong>文字サイズ:</strong> グラフ中の文字もスライド本文と同様のサイズにする（Excel等のデフォルトは小さすぎるので注意）。</li>
+                            <li><strong>線の太さ:</strong> プロジェクター投影用に太くする（2.25pt以上推奨）。</li>
+                        </ul>
+                    </div>
+                    <div style="flex: 1;">
+                        <h3>回路図・ブロック図</h3>
+                        <ul>
+                            <li><strong>スクリーンショット禁止:</strong> シミュレータ画面のスクショは画質が悪く文字が読めません。</li>
+                            <li><strong>作図ツール:</strong> PowerPointの図形機能、Visio、Illustratorなどで描画し、ベクター形式（拡大しても荒れない）で貼り付ける。</li>
+                        </ul>
+                    </div>
+                </div>
+                
+
+                <hr>
+
+                <h2>5. 効率化テクニック</h2>
+
+                <h3>スライドマスター</h3>
+                <p>全スライド共通のデザイン（ページ番号、タイトルの位置、ロゴなど）を一括管理する機能です。</p>
+                <ul>
+                    <li><code>表示</code> タブ &gt; <code>スライドマスター</code> から編集。</li>
+                    <li>個別のスライドでレイアウトをいじる時間を削減できます。</li>
+                </ul>
+
+                <h3>整列・配置</h3>
+                <p>図形やテキストボックスが少しでもズレていると、見栄えが悪く信頼性が下がります。</p>
+                <ul>
+                    <li>図形を複数選択 &gt; <code>配置</code> &gt; <code>左揃え</code> や <code>上下に整列</code> を活用する。</li>
+                    <li>目視で合わせようとせず、必ずツールを使うこと。</li>
+                </ul>
+
+                <h3>ショートカットキー (Win)</h3>
+                <ul>
+                    <li><code>Ctrl + D</code>: 図形の複製（コピペより速い）</li>
+                    <li><code>Ctrl + G</code>: グループ化 (<code>Ctrl + Shift + G</code> で解除)</li>
+                    <li><code>Shift</code> + ドラッグ: 水平・垂直に移動 / 比率を保って拡大縮小</li>
+                </ul>
+                
+                <div class="code-block" style="background-color: #fff3cd; color: #856404; border-left: 5px solid #ffc107;">
+                    <strong>発表前のセルフチェック:</strong><br>
+                    □ 一番後ろの席から文字が読めるか？（文字サイズ）<br>
+                    □ グラフの軸、単位、凡例は抜けていないか？<br>
+                    □ 1枚のスライドに情報を詰め込みすぎていないか？（1スライド1メッセージ）<br>
+                    □ ページ番号は振ってあるか？（質問時に必須）
+                </div>
+
+            </div>
+        </div>
+    </section>
+    <div id="footer-placeholder"></div>
+
+    <script src="/include.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            loadComponent('header-placeholder', '../../header_students.html');
+            loadComponent('footer-placeholder', '/footer.html');
+        });
+    </script>
+</body>
+</html>

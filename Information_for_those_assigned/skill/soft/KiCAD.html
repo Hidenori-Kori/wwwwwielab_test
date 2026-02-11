@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>魏研究室 | 千葉工業大学</title>
+    <link rel="stylesheet" href="/Base/style.css"> 
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body class="theme-green">
+
+    <div id="header-placeholder"></div>
+
+    <section class="hero" style="height: 50vh;">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <h1>KiCad基板設計</h1>
+            <h3>PCB Design & Ordering</h3>
+        </div>
+    </section>
+
+    <section>
+        <div class="container circuit-review">
+            [cite_start]<p>オープンソースのEDA（自動電子設計）ソフトウェア <strong>KiCad</strong> を用いた、回路図作成から基板発注（JLCPCB）までの流れをまとめています [cite: 31, 34]。</p>
+
+            <h2>1. 基板設計のフロー</h2>
+            <div class="code-block" style="background-color: #f9f9f9; color: #333; border-left: 5px solid #006400;">
+                [cite_start]<strong>基本フロー[cite: 30, 36]:</strong><br>
+                1. プロジェクト作成<br>
+                2. <strong>回路図設計 (Schematic)</strong>: 部品の配置と配線<br>
+                3. シンボル作成・割り当て: 部品とフットプリントの紐づけ<br>
+                4. <strong>PCB設計 (Layout)</strong>: 基板上での部品配置と配線<br>
+                5. 発注 (Ordering): ガーバーファイルの出力と入稿
+            </div>
+
+            <hr>
+
+            <h2>2. 回路図設計 (Schematic Editor)</h2>
+            [cite_start]<p>回路図エディタでは、論理的な接続を作成します [cite: 32]。</p>
+            
+            [cite_start]<h3>特徴と注意点 [cite: 35]</h3>
+            <ul>
+                <li><strong>メリット:</strong> 正確な素子配置と配線が可能。2層基板なら設計が比較的容易。</li>
+                <li><strong>デメリット:</strong> 2層基板では寄生容量が発生しやすい。発注にコストと時間がかかる。</li>
+            </ul>
+
+            <h3>フットプリントの割り当て</h3>
+            <p>回路図上のシンボルに対し、実際の部品形状（ランドパターン）を割り当てます。SMD（表面実装）やTHT（スルーホール）など、使用する部品に合わせて適切に選択する必要があります。</p>
+
+            <hr>
+
+            <h2>3. PCB設計 (PCB Editor)</h2>
+            [cite_start]<p>回路図情報を基に、物理的な基板形状を設計します [cite: 27, 28]。</p>
+
+            <h3>主な作業</h3>
+            <ul>
+                <li><strong>外形線 (Edge.Cuts):</strong> 基板のサイズを決める枠線を描画。</li>
+                <li><strong>部品配置:</strong> 配線しやすく、ノイズの影響を受けにくい配置を検討。</li>
+                <li><strong>配線 (Routing):</strong> 信号線、電源線、GND線を接続。層（表/裏）の使い分けが重要。</li>
+            </ul>
+
+            <hr>
+
+            <h2>4. 基板発注 (JLCPCB)</h2>
+            [cite_start]<p>設計したデータを製造業者（JLCPCB等）に入稿します [cite: 24, 25]。</p>
+
+            <h3>発注手順</h3>
+            <ol>
+                <li><strong>ガーバーファイル出力:</strong> KiCadから製造用データ（Gerber & Drill files）を出力し、zipにまとめる。</li>
+                <li><strong>アップロード:</strong> JLCPCBのサイトにzipをドラッグ＆ドロップ。</li>
+                [cite_start]<li><strong>パラメータ確認:</strong> 基本的にデフォルトでOKだが、基板色や厚みなどを変更可能 [cite: 26]。</li>
+            </ol>
+
+            [cite_start]<h3>ステンシル (Stencil) [cite: 25, 26]</h3>
+            <p>表面実装部品（SMD）にはんだペーストを塗るための金属板です。</p>
+            <table border="1" style="border-collapse: collapse; width: 100%; text-align: center;">
+                <thead style="background-color: #f2f2f2;">
+                    <tr><th>項目</th><th>設定例</th><th>備考</th></tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>サイズ</td>
+                        <td>カスタマイズ推奨</td>
+                        [cite_start]<td>デフォルト（380x280mm）は大きすぎて送料が高くなるため、基板サイズに合わせて縮小すると良い [cite: 26]。</td>
+                    </tr>
+                    <tr>
+                        <td>実装面</td>
+                        <td>Top / Bottom</td>
+                        <td>部品が載っている面を選択。</td>
+                    </tr>
+                    <tr>
+                        <td>認識マーク</td>
+                        <td>なし / エッチング</td>
+                        <td>手載せ実装なら通常は不要。</td>
+                    </tr>
+                </tbody>
+            </table>
+
+        </div>
+    </section>
+    
+    <div id="footer-placeholder"></div>
+
+    <script src="/include.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            loadComponent('header-placeholder', '../../header_students.html');
+            loadComponent('footer-placeholder', '/footer.html');
+        });
+    </script>
+</body>
+</html>

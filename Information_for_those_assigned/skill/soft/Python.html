@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>魏研究室 | 千葉工業大学</title>
+    <link rel="stylesheet" href="/Base/style.css"> 
+</head>
+<body class="theme-green">
+
+    <div id="header-placeholder"></div>
+
+    <section class="hero" style="height: 50vh;">
+        <div class="hero-overlay"></div>
+
+        <div class="container hero-content">
+            <h1>Python環境の導入</h1>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div class="container">
+                <p>魏研究室では最適化設計に用いるプログラミング言語としてC/C++を主に使用しますが、<br>
+                データの事後処理、グラフ描画、あるいは特定アルゴリズムのプロトタイピングに <strong>Python</strong> を使用します。<br>
+                ここでは環境変数の設定（Path通し）が不要で、管理が容易な方法で環境を構築します。</p>
+
+                <div class="tutorial-step">
+                    <h2>1. Pythonのインストール (Microsoft Store)</h2>
+                    <p>Windows環境では、Microsoft Storeからインストールするのが最も手軽でトラブルが少ない方法です。<br>環境変数（Path）を自動で管理してくれます。</p>
+                    
+                    <ol>
+                        <li>Windowsのスタートメニューから「Microsoft Store」を開きます。</li>
+                        <li>検索バーに「<strong>Python 3.13</strong>」（またはその時点の最新安定版）と入力します。</li>
+                        <li>「入手」または「インストール」をクリックします。</li>
+                    </ol>
+
+                    <img src="images/python_store_install.png" alt="Microsoft StoreでのPythonインストール画面" class="tutorial-img">
+                        </div>
+
+                <div class="tutorial-step">
+                    <h2>2. VS Codeの拡張機能導入</h2>
+                    <p>エディタとして <strong>Visual Studio Code (VS Code)</strong> を使用します。<br>
+                    VS Codeを起動し、Python開発に必要な拡張機能をインストールします。</p>
+
+                    <ol>
+                        <li>VS Code左側のアイコン群から「拡張機能 (Extensions)」をクリックします（ショートカット: <code>Ctrl + Shift + X</code>）。</li>
+                        <li>検索窓に「<strong>Python</strong>」と入力します。</li>
+                        <li>Microsoft製の「<strong>Python</strong>」拡張機能を選択し、「インストール」をクリックします。</li>
+                    </ol>
+
+                    <img src="images/vscode_python_ext.png" alt="VS Code Python拡張機能" class="tutorial-img">
+                </div>
+
+                <div class="tutorial-step">
+                    <h2>3. インタープリンタの設定と実行確認</h2>
+                    <p>Pythonが正しく認識されているか確認し、簡単なプログラムを実行します。</p>
+
+                    <h3>ファイルの作成</h3>
+                    <p>VS Codeで新しいファイルを作成し、<code>hello.py</code> という名前で保存します。<br>
+                    以下のコードを入力してください。</p>
+                    
+                    <div class="code-block">
+                        <pre>print("Hello, Wei Lab!")</pre>
+                    </div>
+
+                    <h3>重要：インタープリンタの選択</h3>
+                    <p>VS Codeが「どのPythonを使って実行するか」を認識させる必要があります。</p>
+                    <ol>
+                        <li>画面右下のステータスバーにある「{ } Python ...」のような表示、または「インタープリタを選択」をクリックします。<br>
+                        （表示がない場合は <code>Ctrl + Shift + P</code> を押し、「Python: Select Interpreter」と入力して選択します）</li>
+                        <li>リストから、先ほどMicrosoft Storeでインストールした <strong>Python 3.xx (Microsoft Store)</strong> を選択します。</li>
+                    </ol>
+
+                    <img src="images/vscode_interpreter.png" alt="インタープリタの選択画面" class="tutorial-img">
+
+                    <h3>実行</h3>
+                    <p>右上の「▷（実行ボタン）」を押すか、<code>F5</code> キーを押します。<br>
+                    下部のターミナルに <code>Hello, Wei Lab!</code> と表示されれば成功です。</p>
+                </div>
+
+                <div class="tutorial-step">
+                    <h2>4. 研究用ライブラリのインストール</h2>
+                    <p>研究では数値計算やグラフ描画を行うため、以下の外部ライブラリをインストールしておきましょう。</p>
+                    <ul>
+                        <li><strong>NumPy / SciPy:</strong> 数値計算、最適化計算用</li>
+                        <li><strong>Matplotlib:</strong> グラフ描画用</li>
+                    </ul>
+
+                    <p>VS Codeの下部にある「ターミナル」タブをクリックし、以下のコマンドを入力してEnterキーを押してください。</p>
+
+                    <div class="code-block">
+                        <pre>pip install numpy scipy matplotlib pandas</pre>
+                    </div>
+
+                    <p>エラーが出ずにインストールが完了（Successfully installed...と表示）すれば、環境構築は全て完了です。</p>
+                    
+                    <img src="images/vscode_pip_install.png" alt="ターミナルでのpipインストール" class="tutorial-img">
+                </div>
+            </div>
+
+            <div class="nav-grid">
+                <a href="Introduction_to_python.html" class="nav-card">
+                    <div class="nav-icon">⚡</div>
+                    <div class="nav-content">
+                        <h3>Python入門</h3>
+                        <p>これだけわかれば研究できる!</p>
+                    </div>
+                    <div class="nav-arrow">→</div>
+                </a>
+
+                <a href="playgraund.html" class="nav-card">
+                    <div class="nav-icon">🔌</div>
+                    <div class="nav-content">
+                        <h3>テスト環境</h3>
+                        <p>学んだPythonを簡易的な環境で練習してみよう!</p>
+                    </div>
+                    <div class="nav-arrow">→</div>
+                </a>
+            </div>
+        </div>
+    </section>
+    <div id="footer-placeholder"></div>
+
+    <script src="/include.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            loadComponent('header-placeholder', '../../header_students.html');
+            loadComponent('footer-placeholder', '/footer.html');
+        });
+    </script>
+</body>
+</html>

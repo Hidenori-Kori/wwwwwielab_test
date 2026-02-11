@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>魏研究室 | 千葉工業大学</title>
+    <link rel="stylesheet" href="../../Base/style.css"> 
+</head>
+<body class="theme-green">
+
+    <div id="header-placeholder"></div>
+
+    <section class="hero" style="height: 50vh;">
+        <div class="hero-overlay"></div>
+
+        <div class="container hero-content">
+            <h1>電磁気</h1>
+            <h3>Electromagnetism</h3>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+            <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+            <div class="circuit-review">
+                <p>無線給電やエネルギー伝送の基礎となる電磁気学の法則と概念をまとめています。</p>
+
+                <h2>1. ガウスの法則と基本方程式</h2>
+                <p>電場・磁場の源とその振る舞いを記述するマクスウェル方程式の基礎となる法則です。</p>
+
+                <h3>ガウスの法則 (電界)</h3>
+                <p>「閉曲面を貫く電気力線の総本数は、その内部にある電荷の総量に比例する」という法則。</p>
+                <table border="1" style="border-collapse: collapse; width: 100%; text-align: center;">
+                    <thead style="background-color: #f2f2f2;">
+                        <tr>
+                            <th>形式</th>
+                            <th>式</th>
+                            <th>意味</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>積分形</strong></td>
+                            <td>\( \displaystyle \oint_S \boldsymbol{E} \cdot d\boldsymbol{S} = \frac{Q}{\varepsilon_0} \)</td>
+                            <td>閉曲面 \( S \) から出る全磁束は内部電荷 \( Q \) で決まる。</td>
+                        </tr>
+                        <tr>
+                            <td><strong>微分形</strong></td>
+                            <td>\( \nabla \cdot \boldsymbol{E} = \frac{\rho}{\varepsilon_0} \)</td>
+                            <td>ある点からの電場の湧き出しは、その点の電荷密度 \( \rho \) に等しい。</td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+                <h3>磁気に関するガウスの法則</h3>
+                <p>
+                    \( \nabla \cdot \boldsymbol{B} = 0 \)
+                </p>
+                <p>磁気には「単磁荷（モノポール）」が存在しないため、磁力線は必ずループを描き、湧き出しも吸い込みもないことを示す。</p>
+
+                <hr>
+
+                <h2>2. ローレンツ力 (電磁力)</h2>
+                <p>電磁場中を運動する荷電粒子が受ける力。モータの回転原理やプラズマの挙動などの基礎になります。</p>
+
+                <h3>ローレンツ力の式</h3>
+                <p>電荷 \( q \) [C] が、電界 \( \boldsymbol{E} \) [V/m] と磁束密度 \( \boldsymbol{B} \) [T] の中を速度 \( \boldsymbol{v} \) [m/s] で移動するとき受ける力 \( \boldsymbol{F} \) [N]。</p>
+                <p style="text-align: center; font-size: 1.2em;">
+                    \( \boldsymbol{F} = q(\boldsymbol{E} + \boldsymbol{v} \times \boldsymbol{B}) \)
+                </p>
+
+                <ul>
+                    <li><strong>第1項 \( q\boldsymbol{E} \):</strong> 電界から受けるクーロン力（速度に無関係）。</li>
+                    <li><strong>第2項 \( q(\boldsymbol{v} \times \boldsymbol{B}) \):</strong> 磁界から受ける力（速度に依存）。</li>
+                </ul>
+
+                <h3>フレミングの左手の法則との関係</h3>
+                <p>電流 \( I \) が流れる導体（長さ \( l \)）が磁界から受ける力（アンペールの力）は、ローレンツ力の集合として導出されます。</p>
+                <p style="text-align: center;">
+                    \( \boldsymbol{F} = I (\boldsymbol{l} \times \boldsymbol{B}) \)
+                </p>
+                <p>大きさは \( F = BIl \sin \theta \) （\( \theta \) は \( I \) と \( B \) のなす角）。</p>
+                
+                <hr>
+
+                <h2>3. 無線給電 (Wireless Power Transfer)</h2>
+                <p>電線を使わずに電力を伝送する技術。主に「磁界」を媒体としてエネルギーを送ります。</p>
+
+                <h3>主な方式と原理</h3>
+                <table border="1" style="border-collapse: collapse; width: 100%; text-align: center;">
+                    <thead style="background-color: #f2f2f2;">
+                        <tr>
+                            <th>方式</th>
+                            <th>原理 (物理法則)</th>
+                            <th>特徴</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>電磁誘導方式</strong></td>
+                            <td><strong>ファラデーの電磁誘導の法則</strong><br>\( V = -N \frac{d\Phi}{dt} \)</td>
+                            <td>結合係数 \( k \) が高い必要がある。<br>位置ずれに弱いが、近距離で高効率。<br>(例: スマホ充電、変圧器)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>磁界共鳴方式</strong><br>(共振結合)</td>
+                            <td><strong>LC共振と磁気結合</strong><br>送受の共振周波数を一致させる</td>
+                            <td>\( k \) が低くても \( Q \)値が高ければ伝送可能。<br>伝送距離が長く、位置ずれに強い。<br>(例: EV充電)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>伝送効率の指標</h3>
+                <p>無線給電の性能は、結合係数 \( k \) と 負荷品質係数 \( Q \) の積（\( kQ \) 積）で決まることが多い。</p>
+                <ul>
+                    <li><strong>最大効率 \(\eta_{max}\):</strong> Figure of Merit \( U = kQ \) (または \( k\sqrt{Q_1 Q_2} \)) を用いて表される。</li>
+                    <li>\( U \) が大きいほど、高効率な伝送が可能となる。</li>
+                </ul>
+                
+                <hr>
+
+                <h2>4. 覚えておくべき定数</h2>
+                <table border="1" style="border-collapse: collapse; width: 100%; text-align: center;">
+                    <tr>
+                        <td><strong>真空の誘電率</strong></td>
+                        <td>\( \varepsilon_0 \approx 8.854 \times 10^{-12} \) [F/m]</td>
+                    </tr>
+                    <tr>
+                        <td><strong>真空の透磁率</strong></td>
+                        <td>\( \mu_0 = 4\pi \times 10^{-7} \approx 1.257 \times 10^{-6} \) [H/m]</td>
+                    </tr>
+                    <tr>
+                        <td><strong>光速</strong></td>
+                        <td>\( c = \frac{1}{\sqrt{\varepsilon_0 \mu_0}} \approx 3 \times 10^8 \) [m/s]</td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+    </section>
+    <div id="footer-placeholder"></div>
+
+    <script src="../../include.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            loadComponent('header-placeholder', '../header_students.html');
+            loadComponent('footer-placeholder', '../../footer.html');
+        });
+    </script>
+</body>
+</html>

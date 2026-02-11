@@ -1,0 +1,170 @@
+/* --- 基本設定 --- */
+        :root {
+            --primary-color: #003366; /* アカデミックな濃紺 */
+            --accent-color: #007bff;  /* 明るい青 */
+            --bg-color: #f9f9f9;
+            --text-color: #333;
+            --white: #ffffff;
+        }
+        body {
+            font-family: "Helvetica Neue", Arial, "Hiragino Kaku Gothic ProN", "Hiragino Sans", Meiryo, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+        }
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; padding: 0; }
+        
+        /* --- ヘッダー --- */
+        header {
+            background-color: var(--white);
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+        .nav-links a {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: var(--text-color);
+            transition: color 0.3s;
+        }
+        .nav-links a:hover { color: var(--accent-color); }
+
+        /* --- ヒーローセクション（トップ画像） --- */
+        .hero {
+            background: linear-gradient(rgba(0, 51, 102, 0.7), rgba(0, 51, 102, 0.7)), url('https://crowdchem.net/wp-content/uploads/2024/04/iStock-1458825136.jpg.webp');
+            background-size: cover;
+            background-position: center;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            text-align: center;
+            margin-top: 70px;
+        }
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            letter-spacing: 2px;
+        }
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* --- セクション共通 --- */
+        section {
+            padding: 80px 0;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 50px;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 3px;
+            background-color: var(--accent-color);
+            margin: 15px auto 0;
+        }
+
+        /* --- News --- */
+        .news-list {
+            background: var(--white);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        .news-item {
+            border-bottom: 1px solid #eee;
+            padding: 15px 0;
+            display: flex;
+            gap: 20px;
+        }
+        .news-item:last-child { border-bottom: none; }
+        .news-date { color: #888; font-size: 0.9rem; min-width: 100px; }
+
+        /* --- Research (カード型) --- */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+        
+        /* ▼▼▼ 修正箇所：カードのデザイン変更 ▼▼▼ */
+        .card {
+            background: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+            
+            /* リンク化のための必須設定 */
+            display: block;          /* aタグをブロック要素にする */
+            text-decoration: none;   /* 下線を消す */
+            color: inherit;          /* 文字色を継承 */
+            cursor: pointer;         /* マウスカーソルを指にする */
+        }
+        .card:hover { 
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15); /* ホバー時の影を少し濃く */
+        }
+        /* ▲▲▲ 修正箇所ここまで ▲▲▲ */
+
+        .card-img {
+            height: 200px;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #666;
+        }
+        .card-content { padding: 25px; }
+        .card h3 { margin-top: 0; color: var(--primary-color); }
+
+        /* --- Footer --- */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 40px 0;
+            text-align: center;
+        }
+        .footer-info p { margin: 5px 0; opacity: 0.8; }
+
+        /* --- スマホ対応 --- */
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2rem; }
+            .nav-links { display: none; }
+            .logo { margin: 0 auto; }
+        }

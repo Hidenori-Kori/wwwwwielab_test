@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>卒業後の進路 | 魏研究室</title>
+    <link rel="stylesheet" href="../../Base/style.css"> 
+</head>
+<body class="theme-green">
+
+    <div id="header-placeholder"></div>
+
+    <section class="hero" style="height: 40vh;">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <h1>卒業後の進路</h1>
+            <h3>Career Paths</h3>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <p>魏研究室の卒業生は、パワーエレクトロニクス、回路設計、情報通信など多岐にわたる分野で活躍しています。<br>
+            大学院への進学率も高く、高度な専門性を活かして研究開発職に就く学生が多いのが特徴です。(AI談)</p>
+
+            <div class="stats-container">
+                <h2>Our Alumni</h2>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <h3 id="stat-companies">0+</h3>
+                        <p>就職先企業数</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3 id="stat-rate">100%</h3>
+                        <p>進路決定率</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3 id="stat-master">Wait...</h3>
+                        <p>大学院進学・修了</p>
+                    </div>
+                </div>
+            </div>
+
+            <div id="career-list-wrapper">
+                <p style="text-align: center; color: #888;">Loading data...</p>
+            </div>
+
+        </div>
+    </section>
+    
+    <div id="footer-placeholder"></div>
+
+    <script src="../../include.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            loadComponent('header-placeholder', '../header_students.html');
+            loadComponent('footer-placeholder', '../../footer.html');
+            
+            // CSV読み込み開始
+            loadCareerData();
+        });
+
+        async function loadCareerData() {
+            try {
+                // CSVファイルのパス (適宜変更してください)
+                const response = await fetch('../../csv/career_data.csv?v=' + new Date().getTime());
+                if (!response.ok) throw new Error("CSV file not found");
+                const text = await response.text();
+
+                const rows = text.trim().split('\n').slice(1);
+                const wrapper = document.getElementById('career-list-wrapper');
+                wrapper.innerHTML = '';
+
+                // データを格納するオブジェクト (業界ごとに配列を作る)
+                const industryMap = {};
+                let masterCount = 0;
+                let totalCount = 0;
+
+                rows.forEach(row => {
+                    const cols = row.split(',');
+                    if (cols.length < 3) return;
+
+                    const year = cols[0].trim();
+                    const company = cols[1].trim();
+                    const industry = cols[2].trim();
+                    const degree = cols[3] ? cols[3].trim() : "未定";
+
+                    // 統計用カウント
+                    totalCount++;
+                    if (degree.includes("修士") || degree.includes("院") || industry === "進学") {
+                        masterCount++;
+                    }
+
+                    // 業界ごとにグループ化
+                    if (!industryMap[industry]) {
+                        industryMap[industry] = [];
+                    }
+                    industryMap[industry].push({ year, company, degree });
+                });
+
+                // 統計の更新
+                document.getElementById('stat-companies').innerText = Object.keys(industryMap).length * 3 + "+"; // 適当な演出
+                document.getElementById('stat-companies').innerText = totalCount;
+                document.getElementById('stat-master').innerText = Math.round((masterCount / totalCount) * 100) + "%";
+
+
+                // HTML生成 (業界ごとにループ)
+                // 業界名の順序を固定したい場合は配列で指定してください
+                const sortedIndustries = Object.keys(industryMap).sort(); 
+
+                sortedIndustries.forEach(industryName => {
+                    const companies = industryMap[industryName];
+
+                    // セクション作成
+                    const section = document.createElement('div');
+                    section.className = 'industry-section';
+                    
+                    // タイトル
+                    const title = document.createElement('h2');
+                    title.className = 'industry-title';
+                    title.textContent = industryName;
+                    section.appendChild(title);
+
+                    // グリッド
+                    const grid = document.createElement('div');
+                    grid.className = 'company-grid';
+
+                    // 企業カード作成
+                    companies.forEach(item => {
+                        const card = document.createElement('div');
+                        card.className = 'company-card';
+
+                        // 学位タグのクラス判定
+                        let degreeClass = 'degree-other';
+                        let degreeLabel = item.degree;
+                        if (item.degree.includes('修士') || item.degree.includes('博士')) {
+                            degreeClass = 'degree-master';
+                            degreeLabel = 'Master';
+                        } else if (item.degree.includes('学部')) {
+                            degreeClass = 'degree-bachelor';
+                            degreeLabel = 'Bachelor';
+                        }
+
+                        card.innerHTML = `
+                            <div class="company-name">${item.company}</div>
+                            <div class="card-footer">
+                                <div class="grad-year">📅 ${item.year}年度</div>
+                                <span class="degree-tag ${degreeClass}">${degreeLabel}</span>
+                            </div>
+                        `;
+                        grid.appendChild(card);
+                    });
+
+                    section.appendChild(grid);
+                    wrapper.appendChild(section);
+                });
+
+            } catch (error) {
+                console.error("Career Data Error:", error);
+                document.getElementById('career-list-wrapper').innerHTML = 
+                    '<p style="text-align:center;">データの読み込みに失敗しました。</p>';
+            }
+        }
+    </script>
+</body>
+</html>

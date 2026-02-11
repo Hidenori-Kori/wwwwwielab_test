@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>魏研究室 | 千葉工業大学</title>
+    <link rel="stylesheet" href="../../Base/style.css"> 
+</head>
+<body class="theme-green">
+
+    <div id="header-placeholder"></div>
+
+    <section class="hero" style="height: 50vh;">
+        <div class="hero-overlay"></div>
+
+        <div class="container hero-content">
+            <h1>電気回路</h1>
+            <h3>Electrical Circuit</h3>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+            <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+            <div class="circuit-review">
+                <p>研究活動において基礎となる電気回路の公式と概念をまとめています。実験や解析で迷った際の確認用として活用してください。</p>
+
+                <h2>1. 受動素子と磁界結合</h2>
+                <h3>基本3素子</h3>
+                <table border="1" style="border-collapse: collapse; width: 100%; text-align: center;">
+                    <thead style="background-color: #f2f2f2;">
+                        <tr>
+                            <th>素子</th>
+                            <th>電圧 \( v(t) \)</th>
+                            <th>インピーダンス \( \dot{Z} \)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>抵抗 \( R \)</td>
+                            <td>\( v = Ri \)</td>
+                            <td>\( R \)</td>
+                        </tr>
+                        <tr>
+                            <td>インダクタ \( L \)</td>
+                            <td>\( v = L \frac{di}{dt} \)</td>
+                            <td>\( j\omega L \)</td>
+                        </tr>
+                        <tr>
+                            <td>キャパシタ \( C \)</td>
+                            <td>\( v = \frac{1}{C} \int i \, dt \)</td>
+                            <td>\( \frac{1}{j\omega C} \)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h3>コイルの磁界結合 (相互インダクタンス)</h3>
+                <p>2つのコイル（インダクタンス \( L_1, L_2 \)）が磁束を共有する場合の結合。</p>
+                <ul>
+                    <li><strong>電圧方程式:</strong> \( v_1 = L_1 \frac{di_1}{dt} \pm M \frac{di_2}{dt} \) <br>
+                    <span style="font-size:0.9em; color:#666;">（\( \pm \)はドット・極性の向きによる。電流が共にドットから流入・流出なら正）</span></li>
+                    <li><strong>結合係数 \( k \):</strong> 漏れ磁束の少なさを表す (\( 0 \le k \le 1 \))。<br>
+                    \( M = k\sqrt{L_1 L_2} \)</li>
+                </ul>
+                
+
+                <hr>
+
+                <h2>2. 過渡現象 (Transient)</h2>
+                <p>スイッチ操作直後の電圧・電流の時間変化。定常状態に達するまでの速さを<strong>時定数 \( \tau \)</strong> で表す。</p>
+                
+                <table border="1" style="border-collapse: collapse; width: 100%; text-align: center;">
+                    <thead style="background-color: #f2f2f2;">
+                        <tr>
+                            <th>回路</th>
+                            <th>時定数 \( \tau \)</th>
+                            <th>ステップ応答（充電/立ち上がり）</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>RC 直列</strong><br>(Cへの充電)</td>
+                            <td>\( \tau = RC \)</td>
+                            <td>
+                                電圧: \( v_c(t) = V (1 - e^{-t/\tau}) \)<br>
+                                <span style="font-size:0.8em">\( t=\tau \) で約63.2%に到達</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>RL 直列</strong><br>(電流の立ち上がり)</td>
+                            <td>\( \tau = \frac{L}{R} \)</td>
+                            <td>
+                                電流: \( i(t) = \frac{V}{R} (1 - e^{-t/\tau}) \)
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                
+
+                <hr>
+
+                <h2>3. 回路解析の基本定理</h2>
+                <ul>
+                    <li><strong>キルヒホッフの法則:</strong> \( \sum I = 0 \) (電流則), \( \sum V = 0 \) (電圧則)</li>
+                    <li><strong>テブナンの定理:</strong> 任意の回路網を \( V_{th} \) (開放電圧) と \( Z_{th} \) (内部インピーダンス) の直列回路に置換できる。</li>
+                    <li><strong>重ね合わせの理:</strong> 複数の電源がある場合、それぞれの電源単独時の和で計算できる。</li>
+                </ul>
+
+                <hr>
+
+                <h2>4. 交流電力とデシベル</h2>
+                
+                <h3>電力と効率</h3>
+                <ul>
+                    <li><strong>有効電力 \( P \):</strong> \( P = VI \cos \theta \) [W] （実際に消費される電力）</li>
+                    <li><strong>皮相電力 \( S \):</strong> \( S = VI \) [VA]</li>
+                    <li><strong>力率 (Power Factor):</strong> \( \cos \theta = P/S \)</li>
+                    <li><strong>最大電力供給定理:</strong> 電源の内部インピーダンス \( Z_{in} \) に対し、負荷 \( Z_L \) が共役複素数 \( Z_L = \overline{Z_{in}} \) のとき最大電力が供給される。</li>
+                </ul>
+
+                <h3>デシベル (dB) の定義</h3>
+                <p>信号の増幅や減衰を対数で表したもの。入力 \( x_1 \)、出力 \( x_2 \) とする。</p>
+                <ul>
+                    <li><strong>電圧・電流比 (20倍則):</strong> \( G_v = 20 \log_{10} \left| \frac{V_2}{V_1} \right| \) [dB]</li>
+                    <li><strong>電力比 (10倍則):</strong> \( G_p = 10 \log_{10} \left( \frac{P_2}{P_1} \right) \) [dB]</li>
+                </ul>
+                <div style="background-color: #f9f9f9; padding: 10px; border-radius: 5px; font-size: 0.9em;">
+                    <strong>覚えておくべきdB値:</strong><br>
+                    \( -3 \) dB \( \approx 1/\sqrt{2} \) (約0.707倍、電力半減点)<br>
+                    \( 6 \) dB \( \approx 2 \) 倍, \( 20 \) dB \( = 10 \) 倍
+                </div>
+
+                <hr>
+
+                <h2>5. 共振回路と負荷品質係数 (Q)</h2>
+                <p>リアクタンス成分が打ち消し合う周波数 \( f_0 = \frac{1}{2\pi \sqrt{LC}} \) での現象。</p>
+
+                <h3>負荷品質係数 (Loaded Q)</h3>
+                <p>共振の鋭さや、エネルギー蓄積効率を表す。回路構成によって定義式が異なる点に注意。</p>
+                <table border="1" style="border-collapse: collapse; width: 100%; text-align: center;">
+                    <thead style="background-color: #f2f2f2;">
+                        <tr>
+                            <th>回路構成</th>
+                            <th>Q値の定義式</th>
+                            <th>特徴</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>直列共振</strong><br>(Series R-L-C)</td>
+                            <td>\( Q = \frac{\omega_0 L}{R} = \frac{1}{\omega_0 C R} \)</td>
+                            <td>\( R \) が小さいほど \( Q \) は<strong>高く</strong>なる。<br>素子電圧が電源電圧の \( Q \) 倍になる。</td>
+                        </tr>
+                        <tr>
+                            <td><strong>並列共振</strong><br>(Parallel R-L-C)</td>
+                            <td>\( Q = \frac{R}{\omega_0 L} = \omega_0 C R \)</td>
+                            <td>\( R \) が大きいほど \( Q \) は<strong>高く</strong>なる。<br>循環電流が入力電流の \( Q \) 倍になる。</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <hr>
+
+                <h2>6. 分布定数回路（概説）</h2>
+                <p>波長 \( \lambda \) に対して配線長が無視できない高周波領域での扱い。</p>
+                <ul>
+                    <li><strong>特性インピーダンス \( Z_0 \):</strong> \( Z_0 = \sqrt{\frac{L}{C}} \) （無損失線路）</li>
+                    <li><strong>反射係数 \( \Gamma \):</strong> 負荷 \( Z_L \) との不整合による反射の割合。<br>
+                    \( \Gamma = \frac{Z_L - Z_0}{Z_L + Z_0} \) （\( Z_L=Z_0 \) のとき反射なし）</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+    <div id="footer-placeholder"></div>
+
+    <script src="../../include.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            loadComponent('header-placeholder', '../header_students.html');
+            loadComponent('footer-placeholder', '../../footer.html');
+        });
+    </script>
+</body>
+</html>

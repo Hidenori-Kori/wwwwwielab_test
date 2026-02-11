@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>メンバー | 魏研究室</title>
+    <link rel="stylesheet" href="../../Base/style.css"> 
+</head>
+<body>
+
+    <div id="header-placeholder"></div>
+
+    <section class="hero" style="height: 50vh;">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <h1>魏研究室のメンバー紹介</h1>
+            <h3>Members</h3>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <div id="members-container">Loading...</div>
+        </div>
+    </section>
+    
+    <div id="footer-placeholder"></div>
+
+    <script src="../../include.js"></script>
+    
+    <script src="members_loader.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            loadComponent('header-placeholder', '../../header.html');
+            loadComponent('footer-placeholder', '../../footer.html');
+        });
+    </script>
+</body>
+</html>

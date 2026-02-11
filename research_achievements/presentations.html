@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>学会発表 | 魏研究室</title>
+    <link rel="stylesheet" href="../Base/style.css"> 
+</head>
+<body>
+
+    <div id="header-placeholder"></div>
+
+    <section class="hero" style="height: 40vh;">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <h1>学会発表</h1>
+            <h3>Presentations</h3>
+        </div>
+    </section>
+
+    <section class="presentation-list">
+        <div class="container">
+            <h2 class="section-title">Conference Papers</h2>
+            <div id="presentation-list-wrapper">
+                <p style="text-align: center; color: #888;">Loading data...</p>
+            </div>
+        </div>
+    </section>
+    
+    <div id="footer-placeholder"></div>
+
+    <script src="../include.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            loadComponent('header-placeholder', '../header.html');
+            loadComponent('footer-placeholder', '../footer.html');
+            
+            // CSVデータの読み込み
+            loadPresentationsData();
+        });
+
+        async function loadPresentationsData() {
+            try {
+                // キャッシュ回避のためにタイムスタンプを付与（更新が反映されやすくする）
+                const response = await fetch('../csv/presentations_data.csv?v=' + new Date().getTime());
+                
+                if (!response.ok) throw new Error("CSV file not found");
+                const text = await response.text();
+
+                // CSVパース (1行目はヘッダーなので削除)
+                const rows = text.trim().split('\n').slice(1);
+
+                const wrapper = document.getElementById('presentation-list-wrapper');
+                wrapper.innerHTML = ''; // Loading表示を消す
+
+                rows.forEach(row => {
+                    // カンマ区切り（簡易実装：データ内にカンマを含めない前提）
+                    const cols = row.split(',');
+                    if (cols.length < 4) return;
+
+                    const date = cols[0];
+                    const title = cols[1];
+                    const conference = cols[2];
+                    const authors = cols[3];
+                    const link = cols[4] ? cols[4].trim() : "";
+
+                    // リンクがある場合は <a>、なければ <div>
+                    const cardTag = link ? 'a' : 'div';
+                    const hrefAttr = link ? `href="${link}" target="_blank"` : '';
+                    const linkClass = link ? 'has-link' : '';
+                    const linkIcon = link ? '<span class="external-link-icon">🔗 Link</span>' : '';
+
+                    const card = document.createElement(cardTag);
+                    card.className = `presentation-card ${linkClass}`;
+                    if(link) {
+                        card.setAttribute('href', link);
+                        card.setAttribute('target', '_blank');
+                    }
+
+                    card.innerHTML = `
+                        <div class="presentation-date">${date}</div>
+                        <h3 class="presentation-title">
+                            ${title}
+                            ${linkIcon}
+                        </h3>
+                        <div class="presentation-meta">
+                            <span class="meta-label">Conference</span>
+                            <span>${conference}</span>
+                        </div>
+                        <div class="presentation-meta">
+                            <span class="meta-label">Authors</span>
+                            <span>${authors}</span>
+                        </div>
+                    `;
+                    wrapper.appendChild(card);
+                });
+
+            } catch (error) {
+                console.error("Presentations Error:", error);
+                document.getElementById('presentation-list-wrapper').innerHTML = 
+                    '<p style="text-align:center;">データの読み込みに失敗しました。</p>';
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>魏研究室 | 千葉工業大学</title>
+    <link rel="stylesheet" href="../Base/style.css"> 
+</head>
+<body>
+
+    <div id="header-placeholder"></div>
+
+    <section class="hero" style="height: 50vh;">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <h1>論文掲載</h1>
+            <h3>Publications</h3>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <p>当研究室の研究成果（論文・学会発表）一覧です。(いまおいているのは適当なものです)</p>
+
+            <h2>Journals</h2>
+            <ul class="publication-list">
+                
+                <li class="publication-item">
+                    <div class="publication-info">
+                        <span class="publication-title">"Title of the Journal Paper"</span>
+                        T. Wei, Student A, Student B, "Paper Title," IEEE Transactions on Power Electronics, vol. 1, no. 1, pp. 100-110, Jan. 2024.
+                    </div>
+                    <div class="publication-actions">
+                        <a href="bib/paper1.bib" class="btn-dl" download>BibTeX</a>
+                        <button class="btn-dl" onclick="downloadText(this, 'paper_citation.txt')">Text</button>
+                    </div>
+                </li>
+
+                <li class="publication-item">
+                    <div class="publication-info">
+                        <span class="publication-title">"Another Great Research Paper"</span>
+                        Student A, T. Wei, "Research Topic B," IEEJ Journal of Industry Applications, vol. 10, no. 2, pp. 200-205, Mar. 2023.
+                    </div>
+                    <div class="publication-actions">
+                        <a href="bib/paper2.bib" class="btn-dl" download>BibTeX</a>
+                        <button class="btn-dl" onclick="downloadText(this, 'paper2.txt')">Text</button>
+                    </div>
+                </li>
+
+            </ul>
+
+            <h2>International Conferences</h2>
+            <ul class="publication-list">
+                <li class="publication-item">
+                    <div class="publication-info">
+                        <span class="publication-title">"Wireless Power Transfer System using..."</span>
+                        T. Wei, "Conference Paper Title," in Proc. IEEE INTELEC 2023, Bengaluru, India, Oct. 2023.
+                    </div>
+                    <div class="publication-actions">
+                        <a href="bib/conf2023.bib" class="btn-dl" download>BibTeX</a>
+                        <button class="btn-dl" onclick="downloadText(this, 'conf2023.txt')">Text</button>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+    </section>
+    
+    <div id="footer-placeholder"></div>
+
+    <script src="../include.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            loadComponent('header-placeholder', '../header.html');
+            loadComponent('footer-placeholder', '../footer.html');
+        });
+
+        // テキストダウンロード機能
+        function downloadText(btn, filename) {
+            // ボタンの親要素から文献情報(publication-info)を取得
+            const item = btn.closest('.publication-item');
+            let text = item.querySelector('.publication-info').innerText;
+            
+            // 余分な改行やスペースを整形（必要に応じて調整）
+            text = text.replace(/\n+/g, '\n').trim();
+
+            // Blobを作成してダウンロードリンクを生成・クリック
+            const blob = new Blob([text], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename || 'citation.txt';
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+        }
+    </script>
+</body>
+</html>

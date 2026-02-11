@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>魏研究室 | 千葉工業大学</title>
+    <link rel="stylesheet" href="/Base/style.css"> 
+</head>
+<body class="theme-green">
+
+    <div id="header-placeholder"></div>
+
+    <section class="hero" style="height: 50vh;">
+        <div class="hero-overlay"></div>
+
+        <div class="container hero-content">
+            <h1>C/C++入門</h1>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+            <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+            <div class="circuit-review">
+                <p>研究活動（数値計算・制御・組み込み）で頻出するC/C++言語の基礎構文とライブラリのまとめです。</p>
+
+                <h2>1. 基本構造 (C vs C++)</h2>
+                <p>C言語とC++は互換性がありますが、入出力の書き方が異なります。</p>
+                
+                <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                    <div style="flex: 1;">
+                        <h3>C言語 (stdio.h)</h3>
+                        <div class="code-block">
+                            <pre>
+                            #include &lt;stdio.h&gt;
+
+                            int main() {
+                                // コンソール出力
+                                printf("Hello, World!\n");
+                                return 0;
+                            }
+                            </pre>
+                        </div>
+                    </div>
+                    <div style="flex: 1;">
+                        <h3>C++ (iostream)</h3>
+                        <div class="code-block">
+                            <pre>
+                            #include &lt;iostream&gt;
+
+                            int main() {
+                                // コンソール出力
+                                std::cout << "Hello, World!" << std::endl;
+                                return 0;
+                            }
+                            </pre>
+                        </div>
+                    </div>
+                </div>
+
+                <hr>
+
+                <h2>2. データ型と書式指定子</h2>
+                <p><code>printf</code> で変数を表示する際、型に対応した<strong>書式指定子</strong>が必要です。</p>
+
+                <table border="1" style="border-collapse: collapse; width: 100%; text-align: center;">
+                    <thead style="background-color: #f2f2f2;">
+                        <tr>
+                            <th>型名</th>
+                            <th>サイズ (例)</th>
+                            <th>書式指定子 (printf)</th>
+                            <th>用途</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><code>int</code></td>
+                            <td>4 byte</td>
+                            <td><code>%d</code></td>
+                            <td>整数</td>
+                        </tr>
+                        <tr>
+                            <td><code>float</code></td>
+                            <td>4 byte</td>
+                            <td><code>%f</code></td>
+                            <td>単精度実数</td>
+                        </tr>
+                        <tr>
+                            <td><code>double</code></td>
+                            <td>8 byte</td>
+                            <td><code>%lf</code></td>
+                            <td>倍精度実数 (研究ではこちらを推奨)</td>
+                        </tr>
+                        <tr>
+                            <td><code>char</code></td>
+                            <td>1 byte</td>
+                            <td><code>%c</code></td>
+                            <td>1文字</td>
+                        </tr>
+                        <tr>
+                            <td><code>char[]</code></td>
+                            <td>-</td>
+                            <td><code>%s</code></td>
+                            <td>文字列</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <hr>
+
+                <h2>3. 配列とポインタ (重要)</h2>
+                <p>C/C++最大の特徴であるメモリアドレスの扱いについてです。</p>
+
+                <h3>配列</h3>
+                <div class="code-block">
+                    <pre>
+                    int a[5] = {10, 20, 30, 40, 50};
+                    // a[0] が 10, a[4] が 50
+                    </pre>
+                </div>
+
+                <h3>ポインタ</h3>
+                <p>変数の「アドレス（メモリ上の場所）」を格納する変数です。</p>
+                <ul>
+                    <li><code>&変数</code> : 変数のアドレスを取得 (アドレス演算子)</li>
+                    <li><code>*ポインタ</code> : アドレスの中身にアクセス (間接参照演算子)</li>
+                </ul>
+                
+                <div class="code-block">
+                    <pre>
+                    int x = 100;
+                    int *ptr = &x;  // xのアドレスをptrに代入
+
+                    printf("%d\n", *ptr); // アドレスptrの中身(100)を表示
+                    </pre>
+                </div>
+                
+
+                <hr>
+
+                <h2>4. 制御構造</h2>
+                
+                <h3>条件分岐 (if / switch)</h3>
+                <div class="code-block">
+                    <pre>
+                    if (x > 0) {
+                        printf("Positive\n");
+                    } else if (x == 0) {
+                        printf("Zero\n");
+                    } else {
+                        printf("Negative\n");
+                    }
+                    </pre>
+                </div>
+
+                <h3>繰り返し (for / while)</h3>
+                <div class="code-block">
+                    <pre>
+                    // カウンタによるループ
+                    for (int i = 0; i < 10; i++) {
+                        printf("i = %d\n", i);
+                    }
+
+                    // 条件によるループ
+                    while (x < 100) {
+                        x *= 2;
+                    }
+                    </pre>
+                </div>
+
+                <hr>
+
+                <h2>5. 関数の定義</h2>
+                <p>処理をまとめるブロックです。使用する前に宣言（プロトタイプ宣言）するか、main関数の上に書く必要があります。</p>
+                <div class="code-block">
+                    <pre>
+                    // 戻り値の型 関数名(引数)
+                    double square(double x) {
+                        return x * x;
+                    }
+
+                    int main() {
+                        double result = square(2.5);
+                        return 0;
+                    }
+                    </pre>
+                </div>
+
+                <hr>
+
+                <h2>6. 研究で役立つライブラリ</h2>
+
+                <h3>数学関数 (math.h / cmath)</h3>
+                <p>コンパイル時に <code>-lm</code> オプションが必要な場合があります (Linux/gcc)。</p>
+                <table border="1" style="border-collapse: collapse; width: 100%; text-align: center;">
+                    <tr><th>関数</th><th>説明</th><th>例</th></tr>
+                    <tr><td><code>sqrt(x)</code></td><td>平方根 \(\sqrt{x}\)</td><td><code>sqrt(2.0)</code></td></tr>
+                    <tr><td><code>pow(x, y)</code></td><td>べき乗 \(x^y\)</td><td><code>pow(2.0, 3.0)</code></td></tr>
+                    <tr><td><code>sin(x)</code>, <code>cos(x)</code></td><td>三角関数 (ラジアン)</td><td><code>sin(3.14159)</code></td></tr>
+                    <tr><td><code>exp(x)</code></td><td>指数関数 \(e^x\)</td><td><code>exp(1.0)</code></td></tr>
+                    <tr><td><code>log(x)</code></td><td>自然対数 \(\ln x\)</td><td><code>log(10.0)</code></td></tr>
+                    <tr><td><code>fabs(x)</code></td><td>絶対値 \(|x|\)</td><td><code>fabs(-5.5)</code></td></tr>
+                </table>
+
+                <h3>C++の標準ライブラリ (STL)</h3>
+                <p>C++を使う場合、動的配列 <code>vector</code> などが非常に便利です。</p>
+                <div class="code-block">
+                    <pre>
+                    #include &lt;vector&gt;
+                    #include &lt;algorithm&gt; // ソートなどに使用
+
+                    std::vector&lt;int&gt; v = {1, 5, 3};
+                    v.push_back(10); // 末尾に追加
+                    std::sort(v.begin(), v.end()); // 並び替え
+                    </pre>
+                </div>
+            </div>
+
+            <div class="nav-grid">
+                <a href="C_C++.html" class="nav-card">
+                    <div class="nav-icon">⚡</div>
+                    <div class="nav-content">
+                        <h3>C/C++導入方法</h3>
+                        <p>これであなたのパソコンにもC/C++環境を!</p>
+                    </div>
+                    <div class="nav-arrow">→</div>
+                </a>
+
+                <a href="playgraund.html" class="nav-card">
+                    <div class="nav-icon">🔌</div>
+                    <div class="nav-content">
+                        <h3>テスト環境</h3>
+                        <p>学んだC/C++を簡易的な環境で練習してみよう!</p>
+                    </div>
+                    <div class="nav-arrow">→</div>
+                </a>
+            </div>
+        </div>
+    </section>
+    <div id="footer-placeholder"></div>
+
+    <script src="/include.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            loadComponent('header-placeholder', '../../header_students.html');
+            loadComponent('footer-placeholder', '/footer.html');
+        });
+    </script>
+</body>
+</html>

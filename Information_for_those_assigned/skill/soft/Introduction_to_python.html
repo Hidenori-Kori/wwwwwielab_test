@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>魏研究室 | 千葉工業大学</title>
+    <link rel="stylesheet" href="/Base/style.css"> 
+</head>
+<body class="theme-green">
+
+    <div id="header-placeholder"></div>
+
+    <section class="hero" style="height: 50vh;">
+        <div class="hero-overlay"></div>
+
+        <div class="container hero-content">
+            <h1>Python入門</h1>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+            <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+            <div class="circuit-review">
+                <p>講義資料「Pythonを用いたプログラミング言語入門」に基づく基礎文法と、研究で頻出するライブラリのまとめです。</p>
+
+                <h2>1. 基本構文とデータ型</h2>
+                
+                <h3>基本ルール</h3>
+                <ul>
+                    <li><strong>インデント (字下げ):</strong> if文やループ文のブロックは、インデントを揃えることで定義されます (オフサイドルール) 。</li>
+                    <li><strong>コメント:</strong> <code>#</code> から行末まではコメントになります [cite: 54]。</li>
+                    <li><strong>変数宣言:</strong> 型宣言は不要で、代入することで自動的に型が決まります [cite: 88]。</li>
+                </ul>
+
+                <h3>主なデータ型</h3>
+                <table border="1" style="border-collapse: collapse; width: 100%; text-align: center;">
+                    <thead style="background-color: #f2f2f2;">
+                        <tr>
+                            <th>型名</th>
+                            <th>Python表記</th>
+                            <th>説明</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>整数型</td>
+                            <td><code>int</code></td>
+                            <td>扱える値に制限はありません [cite: 131]。</td>
+                        </tr>
+                        <tr>
+                            <td>浮動小数点型</td>
+                            <td><code>float</code></td>
+                            <td>実数を扱います [cite: 131]。</td>
+                        </tr>
+                        <tr>
+                            <td>文字列型</td>
+                            <td><code>str</code></td>
+                            <td><code>'</code> または <code>"</code> で囲みます [cite: 131, 139]。</td>
+                        </tr>
+                        <tr>
+                            <td>ブール型</td>
+                            <td><code>bool</code></td>
+                            <td><code>True</code> または <code>False</code> (条件判定用) [cite: 131]。</td>
+                        </tr>
+                        <tr>
+                            <td>リスト</td>
+                            <td><code>list</code></td>
+                            <td><code>[ ]</code> で定義。要素の追加・変更が可能 。</td>
+                        </tr>
+                        <tr>
+                            <td>タプル</td>
+                            <td><code>tuple</code></td>
+                            <td><code>( )</code> で定義。<strong>作成後の変更不可</strong> 。</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <hr>
+
+                <h2>2. 演算子</h2>
+                <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                    <div style="flex: 1;">
+                        <h3>算術演算子 [cite: 164]</h3>
+                        <table border="1" style="border-collapse: collapse; width: 100%; text-align: center;">
+                            <tr><th>記号</th><th>意味</th><th>例</th></tr>
+                            <tr><td><code>+</code>, <code>-</code></td><td>加算, 減算</td><td><code>a + b</code></td></tr>
+                            <tr><td><code>*</code>, <code>/</code></td><td>乗算, 除算</td><td><code>a * b</code></td></tr>
+                            <tr><td><code>//</code></td><td>商 (整数)</td><td><code>8 // 5</code> → 1</td></tr>
+                            <tr><td><code>%</code></td><td>剰余 (余り)</td><td><code>8 % 5</code> → 3</td></tr>
+                            <tr><td><code>**</code></td><td>べき乗</td><td><code>6 ** 2</code> → 36</td></tr>
+                        </table>
+                    </div>
+                    <div style="flex: 1;">
+                        <h3>比較・論理演算子 [cite: 169, 176]</h3>
+                        <table border="1" style="border-collapse: collapse; width: 100%; text-align: center;">
+                            <tr><th>記号</th><th>意味</th></tr>
+                            <tr><td><code>==</code></td><td>等しい</td></tr>
+                            <tr><td><code>!=</code></td><td>等しくない (<code>&lt;&gt;</code>も可)</td></tr>
+                            <tr><td><code>&lt;</code>, <code>&gt;=</code></td><td>大小比較</td></tr>
+                            <tr><td><code>and</code></td><td>かつ (論理積)</td></tr>
+                            <tr><td><code>or</code></td><td>または (論理和)</td></tr>
+                            <tr><td><code>not</code></td><td>否定</td></tr>
+                        </table>
+                    </div>
+                </div>
+
+                <hr>
+
+                <h2>3. 制御構造</h2>
+                
+                <h3>分岐 (if) [cite: 265, 313]</h3>
+                <div class="code-block">
+            <pre>
+            if 条件式1:
+                処理1
+            elif 条件式2:
+                処理2
+            else:
+                処理3
+            </pre>
+                </div>
+
+                <h3>繰り返し (for / while)</h3>
+                <p><strong>回数指定 (for):</strong> <code>range(開始, 終了, ステップ)</code> を使用します [cite: 408, 430]。</p>
+                <div class="code-block">
+            <pre>
+            for i in range(10):  # 0から9まで繰り返す
+                print(i)
+            </pre>
+                </div>
+
+                <p><strong>条件指定 (while):</strong> 条件が True の間繰り返します [cite: 446]。</p>
+                <div class="code-block">
+            <pre>
+            while x <= 100:
+                sum += x
+                x += 1
+            </pre>
+                </div>
+                <p>※ ループ制御には <code>break</code> (中断) [cite: 616] や <code>continue</code> (スキップ) [cite: 631] が使えます。</p>
+
+                <hr>
+
+                <h2>4. 関数とファイル操作</h2>
+
+                <h3>関数の定義 [cite: 244]</h3>
+                <div class="code-block">
+            <pre>
+            def 関数名(引数1, 引数2):
+                処理
+                return 戻り値
+            </pre>
+                </div>
+
+                <h3>ファイルの読み書き [cite: 648, 653]</h3>
+                <div class="code-block">
+            <pre>
+            # 読み込み ('r')
+            f = open("data.txt", "r", encoding="utf-8")
+            content = f.read()
+            f.close()
+
+            # 書き込み ('w':上書き, 'a':追記)
+            f = open("result.txt", "a")
+            f.write("Test Data\n")
+            f.close()
+            </pre>
+                </div>
+
+                <hr>
+
+                <h2>5. 科学技術計算ライブラリ</h2>
+                <p>研究では以下のライブラリを組み合わせて使用します。</p>
+
+                <h3>NumPy (数値計算) [cite: 560]</h3>
+                <p>高速な行列演算やベクトル計算を行うための基本ライブラリです。講義資料では行列の転置やゼロ行列の生成に使用されています。</p>
+                <div class="code-block">
+            <pre>
+            import numpy as np  # 慣例として np と略す
+
+            # 行列の定義 (多次元リストの代わり)
+            A = np.array([[1, 2], [3, 4]])
+
+            # ゼロ行列 (初期化などに便利) [cite: 579]
+            Z = np.zeros(5) 
+
+            # 転置行列 [cite: 564]
+            A_t = np.transpose(A)
+
+            # 平方根 [cite: 813]
+            root = np.sqrt(2)
+            </pre>
+                </div>
+
+                <h3>SciPy (高度な科学技術計算)</h3>
+                <p>NumPyをベースに、信号処理、最適化、統計、積分などの高度な科学計算機能を提供します。</p>
+                <ul>
+                    <li><strong>用途:</strong> 微分方程式の解法、最適化問題 (最小二乗法など)、フーリエ変換 (FFT)。</li>
+                    <li><strong>例:</strong> <code>from scipy import optimize</code> (最適化)</li>
+                </ul>
+
+                <h3>Matplotlib (グラフ描画)</h3>
+                <p>実験データの可視化やシミュレーション結果のグラフ作成に使用します。</p>
+                <div class="code-block">
+            <pre>
+            import matplotlib.pyplot as plt
+
+            x = np.linspace(0, 10, 100)
+            y = np.sin(x)
+
+            plt.plot(x, y)
+            plt.xlabel("Time [s]")
+            plt.ylabel("Voltage [V]")
+            plt.show()
+            </pre>
+                </div>
+                
+                <h3>Pandas (データ解析)</h3>
+                <p>CSVファイルの読み込みや、表形式のデータの操作に特化しています。</p>
+                <div class="code-block">
+            <pre>
+            import pandas as pd
+
+            # CSVの読み込み
+            df = pd.read_csv('experiment_data.csv')
+
+            # データの表示
+            print(df.head())
+            </pre>
+                </div>
+            </div>
+
+            <div class="nav-grid">
+                <a href="Python.html" class="nav-card">
+                    <div class="nav-icon">⚡</div>
+                    <div class="nav-content">
+                        <h3>Python導入方法</h3>
+                        <p>これであなたのパソコンにもPython環境を!</p>
+                    </div>
+                    <div class="nav-arrow">→</div>
+                </a>
+
+                <a href="playgraund.html" class="nav-card">
+                    <div class="nav-icon">🔌</div>
+                    <div class="nav-content">
+                        <h3>テスト環境</h3>
+                        <p>学んだPythonを簡易的な環境で練習してみよう!</p>
+                    </div>
+                    <div class="nav-arrow">→</div>
+                </a>
+            </div>
+        </div>
+    </section>
+    <div id="footer-placeholder"></div>
+
+    <script src="/include.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            loadComponent('header-placeholder', '../../header_students.html');
+            loadComponent('footer-placeholder', '/footer.html');
+        });
+    </script>
+</body>
+</html>

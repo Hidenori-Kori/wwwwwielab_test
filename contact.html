@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>アクセス・お問い合わせ | 魏研究室</title>
+    <link rel="stylesheet" href="/Base/style.css">
+    <style>
+        /* マップ表示用のスタイル */
+        .map-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9のアスペクト比を維持 */
+            height: 0;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            margin-bottom: 40px;
+        }
+        
+        .map-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        .contact-info {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            border: 1px solid #eee;
+        }
+        
+        .contact-row {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .contact-icon {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+
+    <div id="header-placeholder"></div>
+
+    <section class="hero" style="height: 40vh;">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <h1>Access & Contact</h1>
+            <h3>アクセス・お問い合わせ</h3>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            
+            <h2 class="section-title">Access</h2>
+            <p style="text-align: center; margin-bottom: 20px;">
+                〒275-0016 千葉県習志野市津田沼2-17-1<br>
+                千葉工業大学 津田沼キャンパス 2号館 13階 011301 魏研究室
+            </p>
+
+            <div class="map-container">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d670.3076214146446!2d140.02044770305085!3d35.688648133441156!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60228027a254816d%3A0x539bd60046410377!2z44CSMjc1LTAwMTYg5Y2D6JGJ55yM57-S5b-X6YeO5biC5rSl55Sw5rK877yS5LiB55uu77yR77yX4oiS77yRIDLlj7fppKg!5e0!3m2!1sja!2sjp!4v1768259484382!5m2!1sja!2sjp" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>                </div>
+
+            <h2 class="section-title">Contact</h2>
+            <div class="contact-info">
+                <p>研究内容に関するご質問や、研究室見学の希望などはお気軽にご連絡ください。</p>
+                
+                <div class="contact-row">
+                    <div class="contact-icon">📧</div>
+                    <div>
+                        <strong>Email:</strong><br>
+                        <a href="mailto:example@example.com">wei.lab@example.com</a>
+                    </div>
+                </div>
+
+                <div class="contact-row">
+                    <div class="contact-icon">📞</div>
+                    <div>
+                        <strong>Tel:</strong><br>
+                        047-xxx-xxxx
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <div id="footer-placeholder"></div>
+
+    <script src="/include.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // パスは適宜調整してください
+            loadComponent('header-placeholder', '/header.html');
+            loadComponent('footer-placeholder', '/footer.html');
+        });
+    </script>
+</body>
+</html>

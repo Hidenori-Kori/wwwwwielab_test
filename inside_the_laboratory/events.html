@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>イベント・旅行 | 魏研究室</title>
+    <link rel="stylesheet" href="../Base/style.css"> 
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"/>
+</head>
+<body>
+
+    <div id="header-placeholder"></div>
+
+    <div class="swiper hero-slider">
+        <div class="swiper-wrapper" id="slider-wrapper">
+            </div>
+        <div class="swiper-pagination"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+    </div>
+
+    <section class="event-list">
+        <div class="container">
+            <h2 class="section-title">Events & Trips</h2>
+            <div id="event-list-wrapper">
+                </div>
+        </div>
+    </section>
+    
+    <div id="footer-placeholder"></div>
+
+    <script src="../include.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            loadComponent('header-placeholder', '../header.html');
+            loadComponent('footer-placeholder', '../footer.html');
+            
+            // CSVデータの読み込みと生成
+            loadEventsData();
+        });
+
+        async function loadEventsData() {
+            try {
+                const response = await fetch('../csv/events_data.csv');
+                if (!response.ok) throw new Error("CSV file not found");
+                const text = await response.text();
+
+                // CSVパース (1行目はヘッダーなので削除)
+                const rows = text.trim().split('\n').slice(1);
+
+                const sliderWrapper = document.getElementById('slider-wrapper');
+                const listWrapper = document.getElementById('event-list-wrapper');
+
+                rows.forEach(row => {
+                    // カンマ区切り (データ内にカンマがある場合は注意が必要ですが簡易実装)
+                    const cols = row.split(',');
+                    if (cols.length < 5) return;
+
+                    const date = cols[0];
+                    const title = cols[1];
+                    const location = cols[2];
+                    const members = cols[3];
+                    const image = cols[4];
+                    const link = cols[5] ? cols[5].trim() : "";
+
+                    // 1. ヒーロースライダーへの追加
+                    const slide = document.createElement('div');
+                    slide.className = 'swiper-slide';
+                    slide.style.backgroundImage = `url('${image}')`;
+                    slide.innerHTML = `
+                        <div class="slide-overlay"></div>
+                        <div class="slide-content">
+                            <h2>${title}</h2>
+                            <p>${date} / ${location}</p>
+                        </div>
+                    `;
+                    sliderWrapper.appendChild(slide);
+
+
+                    // 2. イベントリストへの追加
+                    // リンクがある場合は <a> タグ、なければ <div> タグにする
+                    const cardTag = link ? 'a' : 'div';
+                    const hrefAttr = link ? `href="${link}"` : '';
+                    
+                    const card = document.createElement(cardTag);
+                    card.className = 'event-card';
+                    if(link) card.setAttribute('href', link);
+                    
+                    card.innerHTML = `
+                        <div class="event-img" style="background-image: url('${image}');"></div>
+                        <div class="event-info">
+                            <div class="event-date">${date}</div>
+                            <h3 class="event-title">${title}</h3>
+                            <div class="event-meta">📍 場所: ${location}</div>
+                            <div class="event-meta">👥 参加: ${members}</div>
+                        </div>
+                    `;
+                    listWrapper.appendChild(card);
+                });
+
+                // Swiperの初期化
+                initSwiper();
+
+            } catch (error) {
+                console.error("Events Error:", error);
+            }
+        }
+
+        function initSwiper() {
+            new Swiper(".hero-slider", {
+                loop: true,
+                speed: 1000, // ゆっくり切り替わる
+                autoplay: {
+                    delay: 4000,
+                    disableOnInteraction: false,
+                },
+                effect: 'fade', // フェードイン・アウトのエフェクト
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: ".swiper-button-next",
+                    prevEl: ".swiper-button-prev",
+                },
+            });
+        }
+    </script>
+</body>
+</html>

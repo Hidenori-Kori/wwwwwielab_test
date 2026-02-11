@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>魏研究室 | 千葉工業大学</title>
+    <link rel="stylesheet" href="../../Base/style.css"> 
+</head>
+<body class="theme-green">
+
+    <div id="header-placeholder"></div>
+
+    <section class="hero" style="height: 50vh;">
+        <div class="hero-overlay"></div>
+
+        <div class="container hero-content">
+            <h1>電子回路</h1>
+            <h3>Electronic Circuit</h3>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+            <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+
+            <div class="circuit-review">
+                <p>電子デバイスの動作原理と、回路設計に必要な基本公式をまとめています。</p>
+
+                <h2>1. 半導体の基礎</h2>
+                
+                <h3>バンド理論とキャリア</h3>
+                <p>原子が結晶格子を作ると、電子の許容エネルギー準位が帯状（バンド）になります。</p>
+                <ul>
+                    <li><strong>価電子帯 (Valence Band):</strong> 電子が充満している領域。</li>
+                    <li><strong>伝導帯 (Conduction Band):</strong> 電子が自由に動ける領域。</li>
+                    <li><strong>禁制帯 (Band Gap):</strong> 電子が存在できないエネルギーギャップ \( E_g \)。シリコン(Si)では約1.12 eV。</li>
+                </ul>
+
+                <h3>N型・P型半導体 (不純物半導体)</h3>
+                <p>真性半導体（Si単結晶など）に不純物（ドーパント）を微量混ぜることで導電性を持たせます。</p>
+                <table border="1" style="border-collapse: collapse; width: 100%; text-align: center;">
+                    <thead style="background-color: #f2f2f2;">
+                        <tr>
+                            <th>種類</th>
+                            <th>不純物 (ドーパント)</th>
+                            <th>多数キャリア</th>
+                            <th>少数キャリア</th>
+                            <th>特徴</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>N型</strong> (Negative)</td>
+                            <td>5価の元素 (P, Asなど)<br>→ <strong>ドナー</strong>となる</td>
+                            <td><strong>電子</strong> (自由電子)</td>
+                            <td>正孔 (ホール)</td>
+                            <td>電子が1つ余り、動き回る</td>
+                        </tr>
+                        <tr>
+                            <td><strong>P型</strong> (Positive)</td>
+                            <td>3価の元素 (B, Gaなど)<br>→ <strong>アクセプタ</strong>となる</td>
+                            <td><strong>正孔</strong> (ホール)</td>
+                            <td>電子</td>
+                            <td>電子が1つ不足し、穴(正孔)ができる</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <hr>
+
+                <h2>2. PN接合とダイオード</h2>
+                <p>P型とN型を接合すると、境界面でキャリアの拡散と結合が起き、キャリアのない<strong>空乏層</strong>が形成されます。</p>
+                
+                <h3>バイアスと電流</h3>
+                <ul>
+                    <li><strong>順方向バイアス (Pに+, Nに-):</strong> 電位障壁が下がり、電流が流れる。</li>
+                    <li><strong>逆方向バイアス (Pに-, Nに+):</strong> 空乏層が広がり、電流はほとんど流れない。</li>
+                </ul>
+
+                <h3>ダイオードの電流式 (ショックレーの式)</h3>
+                <p>
+                    \[ I_D = I_S \left( e^{\frac{V_D}{n V_T}} - 1 \right) \]
+                </p>
+                <ul style="font-size: 0.9em;">
+                    <li>\( I_S \): 逆方向飽和電流 (非常に小さい値)</li>
+                    <li>\( V_T \): 熱電圧 (\( kT/q \approx 26 \) mV @常温)</li>
+                    <li>\( n \): 理想係数 (通常 1〜2)</li>
+                </ul>
+                <p><strong>実用的な近似:</strong> 順方向電圧 \( V_F \) (約0.6〜0.7V for Si) を超えると導通し、電圧降下は一定とみなすことが多い。</p>
+                
+                <hr>
+
+                <h2>3. バイポーラトランジスタ (BJT)</h2>
+                <p>電流駆動型の素子。ベース電流 \( I_B \) によってコレクタ電流 \( I_C \) を制御します。</p>
+                
+                <h3>基本構造 (NPN型の場合)</h3>
+                <ul>
+                    <li><strong>端子:</strong> E (エミッタ), B (ベース), C (コレクタ)</li>
+                    <li><strong>電流関係:</strong> \( I_E = I_C + I_B \)</li>
+                    <li><strong>電流増幅率 \( h_{FE} \) (または \( \beta \)):</strong> \( I_C = h_{FE} I_B \)</li>
+                </ul>
+                
+                <h3>動作領域</h3>
+                <table border="1" style="border-collapse: collapse; width: 100%; text-align: center;">
+                    <thead style="background-color: #f2f2f2;">
+                        <tr>
+                            <th>領域</th>
+                            <th>条件</th>
+                            <th>動作イメージ</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>遮断 (カットオフ)</strong></td>
+                            <td>\( I_B = 0 \)</td>
+                            <td>スイッチOFF</td>
+                        </tr>
+                        <tr>
+                            <td><strong>活性 (能動)</strong></td>
+                            <td>\( V_{BE} \approx 0.7\text{V}, V_{CE} > V_{CE(sat)} \)</td>
+                            <td>増幅作用あり (\( I_C = \beta I_B \))</td>
+                        </tr>
+                        <tr>
+                            <td><strong>飽和</strong></td>
+                            <td>\( I_B \) 大, \( V_{CE} \approx 0.2\text{V} \)</td>
+                            <td>スイッチON (完全に導通)</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <hr>
+
+                <h2>4. MOSFET (電界効果トランジスタ)</h2>
+                <p>電圧駆動型の素子。ゲート電圧 \( V_{GS} \) によってドレイン電流 \( I_D \) を制御します。入力インピーダンスが非常に高いのが特徴です。</p>
+
+                <h3>基本構造 (Nチャネル型)</h3>
+                <ul>
+                    <li><strong>端子:</strong> S (ソース), G (ゲート), D (ドレイン)</li>
+                    <li><strong>しきい値電圧 \( V_{th} \):</strong> チャンネルが形成され電流が流れ始めるゲート電圧。</li>
+                </ul>
+
+                <h3>動作領域と基本式</h3>
+                <p>※ \( V_{GS} > V_{th} \) (オン状態) において</p>
+                <table border="1" style="border-collapse: collapse; width: 100%; text-align: center;">
+                    <thead style="background-color: #f2f2f2;">
+                        <tr>
+                            <th>領域</th>
+                            <th>条件 (\( V_{DS} \) の大きさ)</th>
+                            <th>ドレイン電流 \( I_D \) の式</th>
+                            <th>特徴</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>線形領域</strong><br>(トライオード領域)</td>
+                            <td>\( V_{DS} < V_{GS} - V_{th} \)</td>
+                            <td>\( I_D \propto \left[ (V_{GS}-V_{th})V_{DS} - \frac{1}{2}V_{DS}^2 \right] \)</td>
+                            <td>可変抵抗として動作。<br>\( V_{DS} \)と共に電流増加。</td>
+                        </tr>
+                        <tr>
+                            <td><strong>飽和領域</strong><br>(ピンチオフ)</td>
+                            <td>\( V_{DS} \ge V_{GS} - V_{th} \)</td>
+                            <td>\( I_D = \frac{1}{2} K (V_{GS} - V_{th})^2 \)</td>
+                            <td>定電流源として動作。<br>増幅回路で使用。</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="font-size:0.9em; color:#666;">※ \( K \) はデバイス定数 (酸化膜容量や移動度、W/L比に依存)</p>
+                
+                <hr>
+
+                <h2>5. BJTとMOSFETの比較</h2>
+                <table border="1" style="border-collapse: collapse; width: 100%; text-align: center;">
+                    <thead style="background-color: #f2f2f2;">
+                        <tr>
+                            <th>項目</th>
+                            <th>バイポーラ (BJT)</th>
+                            <th>MOSFET</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>制御方式</td>
+                            <td>電流制御 (\( I_B \))</td>
+                            <td>電圧制御 (\( V_{GS} \))</td>
+                        </tr>
+                        <tr>
+                            <td>入力インピーダンス</td>
+                            <td>低い</td>
+                            <td>非常に高い</td>
+                        </tr>
+                        <tr>
+                            <td>主な用途</td>
+                            <td>高速アナログ増幅、<br>大電流駆動(IGBT等)</td>
+                            <td>デジタル回路(CPU)、<br>スイッチング電源</td>
+                        </tr>
+                        <tr>
+                            <td>特性</td>
+                            <td>直線性が良い (相互コンダクタンス \(g_m\) 大)</td>
+                            <td>スイッチングが高速、<br>消費電力が小さい</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
+    <div id="footer-placeholder"></div>
+
+    <script src="../../include.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            loadComponent('header-placeholder', '../header_students.html');
+            loadComponent('footer-placeholder', '../../footer.html');
+        });
+    </script>
+</body>
+</html>

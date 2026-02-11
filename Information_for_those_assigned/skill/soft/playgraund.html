@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playground | 魏研究室</title>
+    <link rel="stylesheet" href="/Base/style.css">
+    
+    <link rel="stylesheet" href="https://pyscript.net/releases/2023.05.1/pyscript.css" />
+    <script defer src="https://pyscript.net/releases/2023.05.1/pyscript.js"></script>
+
+    <style>
+        /* タブ切り替えのデザイン */
+        .tab-container {
+            display: flex;
+            cursor: pointer;
+            margin-bottom: 20px;
+            border-bottom: 2px solid #ddd;
+        }
+        .tab-item {
+            padding: 10px 20px;
+            font-weight: bold;
+            color: #666;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s;
+        }
+        .tab-item:hover {
+            color: #000;
+            background-color: #f9f9f9;
+        }
+        .tab-item.active {
+            color: #007bff; /* テーマカラーに合わせて変更可 */
+            border-bottom: 3px solid #007bff;
+        }
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* 外部サイトへのリンクカード */
+        .external-tool-card {
+            display: flex;
+            align-items: center;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            padding: 20px;
+            margin-bottom: 15px;
+            text-decoration: none;
+            color: #333;
+            background: #fff;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .external-tool-card:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        .tool-icon {
+            font-size: 2rem;
+            margin-right: 15px;
+            color: #555;
+        }
+        .tool-info h4 {
+            margin: 0 0 5px 0;
+            color: #007bff;
+        }
+        .tool-info p {
+            margin: 0;
+            font-size: 0.9em;
+            color: #666;
+        }
+    </style>
+</head>
+<body class="theme-green">
+
+    <div id="header-placeholder"></div>
+
+    <section class="hero" style="height: 40vh;">
+        <div class="hero-overlay"></div>
+        <div class="container hero-content">
+            <h1>簡易実行環境</h1>
+            <h1>Playground</h1>
+            <h3>Online Execution Environment</h3>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <p>Webブラウザ上で簡易的にコードを実行できる環境です。<br>
+            ちょっとしたアルゴリズムの確認や、ライブラリの動作テストに利用してください。</p>
+
+            <div class="tab-container">
+                <div class="tab-item active" onclick="switchTab('python')">Python (PyScript)</div>
+                <div class="tab-item" onclick="switchTab('cpp')">C / C++</div>
+            </div>
+
+            <div id="tab-python" class="tab-content active">
+                <div style="background-color:#f0f8ff; padding:15px; border-left:5px solid #007bff; margin-bottom:20px;">
+                    <strong>Python Area:</strong> 以下にコードを書き、Shift+Enterで実行できます。<br>
+                    <small>※初回読み込みに数秒かかる場合があります。ブラウザ内で処理が完結するため安全です。</small>
+                </div>
+
+                <py-repl>
+                    print("Hello, Wei Lab!")
+                </py-repl>
+
+                <div id="plot-area"></div>
+            </div>
+
+            <div id="tab-cpp" class="tab-content">
+                <div style="background-color:#fff3cd; padding:15px; border-left:5px solid #ffc107; margin-bottom:20px;">
+                    <strong>Note:</strong> C/C++はコンパイルが必要なため、外部のオンラインコンパイラを利用します。<br>
+                    以下のサービスは非常に優秀で、Boostライブラリなども利用可能です。
+                </div>
+
+                <a href="https://wandbox.org/" target="_blank" class="external-tool-card">
+                    <div class="tool-icon">🛠️</div>
+                    <div class="tool-info">
+                        <h4>Wandbox (ワンドボックス)</h4>
+                        <p>日本発の強力なオンラインコンパイラ。GCC, Clangの最新版や多数のオプションが利用可能。</p>
+                    </div>
+                </a>
+
+                <a href="https://godbolt.org/" target="_blank" class="external-tool-card">
+                    <div class="tool-icon">🔍</div>
+                    <div class="tool-info">
+                        <h4>Compiler Explorer (Godbolt)</h4>
+                        <p>コンパイル結果のアセンブリ言語をリアルタイムで確認可能。最適化の確認に最適。</p>
+                    </div>
+                </a>
+                
+                <a href="https://paiza.io/ja/projects/new?language=cpp" target="_blank" class="external-tool-card">
+                    <div class="tool-icon">💻</div>
+                    <div class="tool-info">
+                        <h4>Paiza.IO</h4>
+                        <p>手軽に実行環境を作成・共有できるサービス。標準入力なども扱いやすい。</p>
+                    </div>
+                </a>
+            </div>
+            <div class="nav-grid">
+                <a href="C_C++.html" class="nav-card">
+                    <div class="nav-icon">🔌</div>
+                    <div class="nav-content">
+                        <h3>C/C++入門</h3>
+                        <p>これだけわかればなんとかなる!</p>
+                    </div>
+                    <div class="nav-arrow">→</div>
+                </a>
+
+                <a href="Introduction_to_python.html" class="nav-card">
+                    <div class="nav-icon">⚡</div>
+                    <div class="nav-content">
+                        <h3>Python入門</h3>
+                        <p>これだけわかれば研究できる!</p>
+                    </div>
+                    <div class="nav-arrow">→</div>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <div id="footer-placeholder"></div>
+
+    <script src="/include.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            loadComponent('header-placeholder', '../../header_students.html');
+            loadComponent('footer-placeholder', '/footer.html');
+        });
+
+        // タブ切り替え機能
+        function switchTab(tabName) {
+            // すべてのコンテンツを隠す
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+            // すべてのタブの選択状態を解除
+            document.querySelectorAll('.tab-item').forEach(el => el.classList.remove('active'));
+
+            // 選択されたものを表示
+            document.getElementById('tab-' + tabName).classList.add('active');
+            
+            // クリックされたタブをアクティブにする
+            // (event.targetを使う簡易実装)
+            const tabs = document.querySelectorAll('.tab-item');
+            if(tabName === 'python') tabs[0].classList.add('active');
+            if(tabName === 'cpp') tabs[1].classList.add('active');
+        }
+    </script>
+</body>
+</html>

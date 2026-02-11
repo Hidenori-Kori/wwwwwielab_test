@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>魏研究室 | 千葉工業大学</title>
+    <link rel="stylesheet" href="/Base/style.css"> 
+</head>
+<body class="theme-green">
+
+    <div id="header-placeholder"></div>
+
+    <section class="hero" style="height: 50vh;">
+        <div class="hero-overlay"></div>
+
+        <div class="container hero-content">
+            <h1>資料作成</h1>
+            <h3>Documents and Slides</h3>
+        </div>
+    </section>
+
+    <section>
+        <div class="container">
+            <h3>魏研究室で用いる資料作成ソフトについて</h3>
+            <p>魏研究室ではゼミ発表の際にPowerPointやTeXなどの資料作成ソフトを使用します。<br>特にTeXは学会などに投稿する論文の作成に使用されます。<br>ぜひこのタイミングでこれらのソフトの基本的な使い方を学びましょう。</p>
+            <div class="grid">
+                    <a href="soft/PowerPoint.html" class="card">
+                        <div class="card-img" style="background:url('/figurer/IMG_0111.jpeg') center/cover;"></div>
+                        <div class="card-content">
+                            <h3>PowerPoint</h3>
+                            <p>概要</p>
+                        </div>
+                    </a>
+                    <a href="soft/TeX.html" class="card">
+                        <div class="card-img" style="background:url('/figurer/IMG_0111.jpeg') center/cover;"></div>
+                        <div class="card-content">
+                            <h3>TeX</h3>
+                            <p>概要</p>
+                        </div>
+                    </a>
+            </div>
+        </div>
+    </section>
+    <div id="footer-placeholder"></div>
+
+    <script src="/include.js"></script>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            loadComponent('header-placeholder', '../header_students.html');
+            loadComponent('footer-placeholder', '/footer.html');
+        });
+    </script>
+</body>
+</html>
