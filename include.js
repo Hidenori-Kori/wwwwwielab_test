@@ -175,16 +175,19 @@ function updateLangButtons() {
     var cookieVal = getCookie('googtrans');
     var isEnglish = (cookieVal && cookieVal.indexOf('/en') > -1);
 
+    // セレクタを .lang-btn に変更
     var jaBtn = document.querySelector('button[onclick="changeLanguage(\'ja\')"]');
     var enBtn = document.querySelector('button[onclick="changeLanguage(\'en\')"]');
 
     if (jaBtn && enBtn) {
+        // 一旦両方の active クラスを外す
+        jaBtn.classList.remove('active-lang');
+        enBtn.classList.remove('active-lang');
+
         if (isEnglish) {
             enBtn.classList.add('active-lang');
-            jaBtn.classList.remove('active-lang');
         } else {
             jaBtn.classList.add('active-lang');
-            enBtn.classList.remove('active-lang');
         }
     }
 }

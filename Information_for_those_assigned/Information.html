@@ -268,14 +268,14 @@
 
     <div id="footer-placeholder"></div>
 
-    <script src="/include.js"></script>
+    <script src="../include.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             // ヘッダー・フッター読み込み
             loadComponent('header-placeholder', '/header_students.html');
-            loadComponent('footer-placeholder', '/footer.html');
+            loadComponent('footer-placeholder', '../footer.html');
 
             // Q&Aデータの読み込みと生成
             loadQAData();
@@ -364,8 +364,6 @@
     </script>
 
     <div id="footer-placeholder"></div>
-
-    <script src="/include.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
             // パスは階層に合わせて調整（ルートなら ./header.html）

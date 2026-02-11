@@ -562,26 +562,60 @@ footer {
 
 .code-lines li:nth-child(even) { background-color: rgba(255,255,255,0.03); } /* 偶数行の背景色 */
 
-/* --- 言語切り替えボタンのデザイン --- */
-.lang-switch {
-    position: absolute; /* ヘッダー内で絶対配置 */
-    right: 20px;        /* 右端からの距離 */
-    top: 50%;           /* 縦方向中央 */
-    transform: translateY(-50%);
+/* --- 言語切り替え（テキスト版）のデザイン --- */
+
+/* コンテナ設定 */
+.lang-switch-text {
     display: flex;
-    gap: 10px;
-    z-index: 1100;      /* ナビゲーションより手前に */
+    align-items: center;
+    margin-left: 20px; /* PC版で左のリンクとの間隔 */
+    color: var(--primary-color);
 }
 
-/* スマホの時は位置調整 */
+/* ボタンのスタイル（リセットしてテキストっぽく） */
+.lang-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 500;
+    color: #888; /* 非アクティブ時はグレー */
+    padding: 5px;
+    font-family: inherit; /* サイトのフォントに合わせる */
+    transition: all 0.3s;
+}
+
+.lang-btn:hover {
+    color: var(--primary-color);
+}
+
+/* スラッシュ(/)のデザイン */
+.separator {
+    font-size: 0.9rem;
+    color: #ccc;
+    margin: 0 5px;
+}
+
+/* 選択中の言語（アクティブ）のデザイン */
+.lang-btn.active-lang {
+    color: var(--primary-color); /* テーマカラーにする */
+    font-weight: bold;
+    border-bottom: 2px solid var(--accent-color); /* 下線をつける */
+}
+
+/* --- スマホ表示時の調整 --- */
 @media (max-width: 768px) {
-    .lang-switch {
-        position: relative;
-        right: auto;
-        top: auto;
-        transform: none;
-        justify-content: center;
-        margin: 10px 0;
+    .lang-switch-text {
+        margin: 20px 0 0 0; /* 上に余白 */
+        justify-content: center; /* 中央寄せ */
+        border-top: 1px solid #eee; /* 区切り線 */
+        padding-top: 20px;
+        width: 100%; /* 横幅いっぱいに */
+    }
+
+    .lang-btn {
+        font-size: 1.2rem; /* スマホでは少し大きく */
+        padding: 10px;
     }
 }
 
@@ -1421,3 +1455,5 @@ font {
     background: var(--primary-color);
     opacity: 1;
 }
+
+
