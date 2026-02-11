@@ -31,13 +31,22 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
-// --- ハンバーガーメニューの開閉処理 ---
+// --- ハンバーガーメニューの開閉および外側クリックで閉じる処理 ---
 document.addEventListener('click', function(e) {
-    // クリックされたのが「.hamburger」またはその中身なら実行
+    const nav = document.querySelector('.nav-links');
+    const hamburger = document.querySelector('.hamburger');
+
+    // 1. ハンバーガーボタン自体がクリックされた場合
     if (e.target.closest('.hamburger')) {
-        const nav = document.querySelector('.nav-links');
-        if (nav) {
-            nav.classList.toggle('active'); // activeクラスをつけ外し
+        nav.classList.toggle('active');
+        return; // 処理終了
+    }
+
+    // 2. メニューが表示されている時に、メニュー以外の場所がクリックされた場合
+    if (nav && nav.classList.contains('active')) {
+        // クリックされた要素が nav-links の中身でも、hamburger でもなければ閉じる
+        if (!e.target.closest('.nav-links') && !e.target.closest('.hamburger')) {
+            nav.classList.remove('active');
         }
     }
 });
